@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Layout from '@/views/layout/Layout'
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 Vue.use(Router)
 const views = 'views'
 /* Layout */
-import Layout from '@/views/layout/Layout'
+
 export const routers = [
   // { path: '/login', component: () => import(`@/${views}/login/index`), hidden: true },
   // { path: '/404', component: () => import(`@/${views}/errorPage/404`), hidden: true },
