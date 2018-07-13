@@ -44,7 +44,7 @@ module.exports = {
       type: 'string',
       required: false,
       message: 'Project description',
-      default: 'A Vue.js project',
+      default: 'A Glsx-Vue-Admin by Vue.js project',
     },
     author: {
       when: 'isNotTest',
@@ -132,6 +132,11 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Setup e2e tests with Nightwatch?',
+    },
+    normalize: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Install normalize.css ( A modern alternative to CSS resets ) ?',
     },
     autoInstall: {
       when: 'isNotTest',

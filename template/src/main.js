@@ -10,6 +10,9 @@ import router from './router'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
 import 'glsx-vue-admin/dist/glsx-vue-admin.css'
+{{#normalize}}
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+{{/normalize}}
 import ElementUI from 'element-ui'
 import GlsxVueAdmin from 'glsx-vue-admin'
 import config from './config'
