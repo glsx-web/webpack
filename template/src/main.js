@@ -4,11 +4,8 @@
 {{/if_eq}}
 import Vue from 'vue'
 import App from './App'
-{{#router}}
-import router from './router'
-{{/router}}
+import './assets/icons'
 import 'element-ui/lib/theme-chalk/index.css'
-import store from './store'
 import 'glsx-vue-admin/dist/glsx-vue-admin.css'
 {{#normalize}}
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
@@ -17,6 +14,10 @@ import ElementUI from 'element-ui'
 import GlsxVueAdmin from 'glsx-vue-admin'
 import config from './config'
 import i18n from './lang'
+import store from './store'
+{{#router}}
+import router from './router'
+{{/router}}
 Vue.use(ElementUI)
 Vue.use(GlsxVueAdmin, config)
 Vue.config.productionTip = false
