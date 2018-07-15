@@ -4,6 +4,7 @@ export default{
     height: 60,
     navbar: {
       visible: true,
+      height: 60,
       user: {
         visible: true,
         avatar: {
@@ -47,6 +48,7 @@ export default{
     },
     tagsView: {
       visible: true,
+      height: 34,
       'activeColor': ''
     }
   },
@@ -72,7 +74,7 @@ export default{
     visible: true,
     color: '',
     backgroundColor: 'transparent',
-    height: 20
+    height: 60
   },
   app: {
     defaultColor: '#409EFF'
