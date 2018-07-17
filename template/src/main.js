@@ -16,9 +16,7 @@ import GlsxVueCommon from 'glsx-vue-common'
 import config from './config'
 import i18n from './lang'
 import store from './store'
-{{#router}}
 import router from './router'
-{{/router}}
 Vue.use(ElementUI)
 Vue.use(GlsxVueCommon)
 Vue.use(GlsxVueAdmin, config)
@@ -27,9 +25,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  {{#router}}
   router,
-  {{/router}}
   store,
   i18n,
   {{#if_eq build "runtime"}}
