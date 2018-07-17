@@ -12,6 +12,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 {{/normalize}}
 import ElementUI from 'element-ui'
 import GlsxVueAdmin from 'glsx-vue-admin'
+import GlsxVueCommon from 'glsx-vue-common'
 import config from './config'
 import i18n from './lang'
 import store from './store'
@@ -19,6 +20,7 @@ import store from './store'
 import router from './router'
 {{/router}}
 Vue.use(ElementUI)
+Vue.use(GlsxVueCommon)
 Vue.use(GlsxVueAdmin, config)
 Vue.config.productionTip = false
 

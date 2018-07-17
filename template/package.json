@@ -29,7 +29,8 @@
     "vue-router": "^3.0.1",
     "vuex": "3.0.1",
     "element-ui": "^2.4.1",
-    "glsx-vue-admin": "^2.0.5"
+    "glsx-vue-admin": "^2.0.6",
+    "glsx-vue-common": "^1.0.8"
   },
   "devDependencies": {
     {{#lint}}
