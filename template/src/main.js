@@ -10,6 +10,9 @@ import router from '@/router/index.js'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 import GlsxVueCommon from 'glsx-vue-common'
+{{#lodash}}
+import Lodash from 'lodash'
+{{/lodash}}
 
 Vue.use(ElementUI)
 Vue.use(GlsxVueCommon)

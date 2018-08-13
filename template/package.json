@@ -29,7 +29,10 @@
     "vue-router": "^3.0.1"{{/router}},
     "vuex": "3.0.1",
     "element-ui": "^2.4.1",
-    "glsx-vue-common": "^1.1.0"
+    "glsx-vue-common": "^1.1.0",
+    {{#lodash}}
+    "lodash": "^4.17.10"
+    {{/lodash}}
   },
   "devDependencies": {
     {{#lint}}

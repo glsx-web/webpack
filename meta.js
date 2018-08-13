@@ -41,8 +41,8 @@ module.exports = {
     },
     description: {
       when: 'isNotTest',
-      type: 'string',
-      required: false,
+      type: 'type',
+      require: false,
       message: 'Project description',
       default: 'A Vue.js project',
     },
@@ -155,6 +155,11 @@ module.exports = {
           short: 'no',
         },
       ],
+    },
+    lodash: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Install lodash?\n(Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。)',
     },
   },
   filters: {
