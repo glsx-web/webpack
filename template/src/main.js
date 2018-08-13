@@ -5,30 +5,40 @@
 import Vue from 'vue'
 import App from './App'
 {{#router}}
-import router from './router'
+import router from '@/router/index.js'
 {{/router}}
-mport 'element-ui/lib/theme-chalk/index.css'
-import 'glsx-vue-admin/dist/glsx-vue-admin.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
-import GlsxVueAdmin from 'glsx-vue-admin'
-import config from './config'
+import GlsxVueCommon from 'glsx-vue-common'
+
 Vue.use(ElementUI)
-Vue.use(GlsxVueAdmin, config)
-import store from './store'
-Vue.config.productionTip = false
+Vue.use(GlsxVueCommon)
+
+var mixin = {
+  mounted () {
+    const theme = new this.$Theme()
+    const connection = this.$Penpal.connectToParent({
+      methods: {
+        setTheme (color) {
+          theme.change(color)
+        },
+        height () {
+          return document.height || document.body.offsetHeight // document.documentElement.clientHeight || document.body.clientHeight //
+        }
+      }
+    })
+    connection.promise.then(parent => {
+      parent.onload()
+    })
+  }
+}
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  mixins: [mixin],
   {{#router}}
   router,
   {{/router}}
-  store,
-  {{#if_eq build "runtime"}}
   render: h => h(App)
-  {{/if_eq}}
-  {{#if_eq build "standalone"}}
-  components: { App },
-  template: '<App/>'
-  {{/if_eq}}
 })
