@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 import GlsxVueCommon from 'glsx-vue-common'
 {{#lodash}}
-import _ from 'lodash'
+//import _ from 'lodash'
 {{/lodash}}
 
 Vue.use(ElementUI)
