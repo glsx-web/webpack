@@ -44,7 +44,7 @@ module.exports = {
       type: 'string',
       required: false,
       message: 'Project description',
-      default: 'A Glsx-Vue-Admin by Vue.js project',
+      default: 'A Vue.js project',
     },
     author: {
       when: 'isNotTest',
@@ -69,38 +69,38 @@ module.exports = {
         },
       ],
     },
-    // router: {
-    //   when: 'isNotTest',
-    //   type: 'confirm',
-    //   message: 'Install vue-router?',
-    // },
-    // lint: {
-    //   when: 'isNotTest',
-    //   type: 'confirm',
-    //   message: 'Use ESLint to lint your code?',
-    // },
-    // lintConfig: {
-    //   when: 'isNotTest && lint',
-    //   type: 'list',
-    //   message: 'Pick an ESLint preset',
-    //   choices: [
-    //     {
-    //       name: 'Standard (https://github.com/standard/standard)',
-    //       value: 'standard',
-    //       short: 'Standard',
-    //     },
-    //     {
-    //       name: 'Airbnb (https://github.com/airbnb/javascript)',
-    //       value: 'airbnb',
-    //       short: 'Airbnb',
-    //     },
-    //     {
-    //       name: 'none (configure it yourself)',
-    //       value: 'none',
-    //       short: 'none',
-    //     },
-    //   ],
-    // },
+    router: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Install vue-router?',
+    },
+    lint: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Use ESLint to lint your code?',
+    },
+    lintConfig: {
+      when: 'isNotTest && lint',
+      type: 'list',
+      message: 'Pick an ESLint preset',
+      choices: [
+        {
+          name: 'Standard (https://github.com/standard/standard)',
+          value: 'standard',
+          short: 'Standard',
+        },
+        {
+          name: 'Airbnb (https://github.com/airbnb/javascript)',
+          value: 'airbnb',
+          short: 'Airbnb',
+        },
+        {
+          name: 'none (configure it yourself)',
+          value: 'none',
+          short: 'none',
+        },
+      ],
+    },
     unit: {
       when: 'isNotTest',
       type: 'confirm',
@@ -133,11 +133,6 @@ module.exports = {
       type: 'confirm',
       message: 'Setup e2e tests with Nightwatch?',
     },
-    normalize: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: 'Install normalize.css ( A modern alternative to CSS resets ) ?',
-    },
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
@@ -160,6 +155,11 @@ module.exports = {
           short: 'no',
         },
       ],
+    },
+    normalize: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Install normalize.css?\n(normalize.css 使浏览器更加一致地呈现所有元素并符合现代标准。)',
     },
   },
   filters: {

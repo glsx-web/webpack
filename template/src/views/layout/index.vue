@@ -2,10 +2,11 @@
   <el-container>
     <el-aside width="auto"><gl-app-aside /></el-aside>
       <el-container>
-        <el-header><gl-app-header/></el-header>
+        <el-header ><gl-app-header/></el-header>
         <el-main> <gl-app-main/></el-main>
-        <el-footer><gl-app-footer/></el-footer>
+        <el-footer ><gl-app-footer/></el-footer>
       </el-container>
+      <el-aside width="auto"><gl-control /></el-aside>
   </el-container>
 </template>
 <script>
@@ -16,6 +17,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
     .el-main{
       padding: 0 !important;
+      transform: translateX(1px)
     }
     .el-header{
       height: auto !important;
@@ -23,6 +25,10 @@ export default {
     }
     .el-footer{
       padding: 0 !important;
+      height: auto !important;
+    }
+    .el-container{
+      transition: all 1s linear
     }
 </style>
 
