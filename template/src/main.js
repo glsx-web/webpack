@@ -15,6 +15,8 @@ import GlsxVueAdmin from 'glsx-vue-admin'
 import GlsxVueCommon from 'glsx-vue-common'
 import config from './config'
 import store from './store'
+import i18n from './lang'
+
 {{#router}}
 import router from './router'
 {{/router}}
