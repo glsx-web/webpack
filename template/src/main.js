@@ -36,6 +36,7 @@ new Vue({
   render: h => h(App),
   {{/if_eq}}
   store,
+  i18n,
   {{#if_eq build "standalone"}}
   components: { App },
   template: '<App/>'
