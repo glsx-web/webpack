@@ -28,8 +28,8 @@
     "vue": "^2.5.2"{{#router}},
     "vue-router": "^3.0.1"{{/router}},
     "vuex": "3.0.1",
-    "element-ui": "^2.4.1",
-    "glsx-vue-common": "^1.1.0",
+    "GlsxVueComponents": "^1.0.12",
+    "glsx-vue-common": "^1.1.6",
     {{#lodash}}
     "lodash": "^4.17.10"
     {{/lodash}}

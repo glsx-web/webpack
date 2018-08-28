@@ -7,14 +7,14 @@ import App from './App'
 {{#router}}
 import router from '@/router/index.js'
 {{/router}}
-import 'element-ui/lib/theme-chalk/index.css'
-import ElementUI from 'element-ui'
+import GlsxVueComponents from 'glsx-vue-components'
+import 'glsx-vue-components/dist/glsx-vue-components.css'
 import GlsxVueCommon from 'glsx-vue-common'
 {{#lodash}}
 //import _ from 'lodash'
 {{/lodash}}
 
-Vue.use(ElementUI)
+Vue.use(GlsxVueComponents)
 Vue.use(GlsxVueCommon)
 
 var mixin = {
