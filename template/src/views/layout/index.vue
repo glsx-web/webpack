@@ -5,9 +5,13 @@
 
 <script>
 export default {
-  name: 'layout'
-}
+  name: 'layout',
+  data () {
+    return {
 
+    }
+  }
+}
 </script>
 <style scoped>
 </style>
