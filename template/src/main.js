@@ -9,7 +9,8 @@ import router from '@/router/index.js'
 {{/router}}
 import GlsxVueComponents from 'glsx-vue-components'
 import 'glsx-vue-components/dist/glsx-vue-components.css'
-import GlsxVueCommon from 'glsx-vue-common'
+import { GlsxVueCommon, GlConst } from 'glsx-vue-common'
+const { AppConst } = GlConst
 {{#lodash}}
 //import _ from 'lodash'
 {{/lodash}}
@@ -20,10 +21,14 @@ Vue.use(GlsxVueCommon)
 var mixin = {
   mounted () {
     const theme = new this.$Theme()
+    const menus = new this.$get_config_by_key(AppConst.Auth.Resources.Key)
     const connection = this.$Penpal.connectToParent({
       methods: {
         setTheme (color) {
           theme.change(color)
+        },
+        setResources (resources) {
+          menus.change(resources)
         },
         height () {
           return document.height || document.body.offsetHeight // document.documentElement.clientHeight || document.body.clientHeight //
