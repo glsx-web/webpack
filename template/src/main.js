@@ -37,6 +37,7 @@ var mixin = {
       if (cfg) return
       parent.getResources().then(config => {
         _this.$set_session_config(config)
+      })
     })
   }
 }
