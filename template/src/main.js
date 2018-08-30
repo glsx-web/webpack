@@ -10,12 +10,13 @@ import router from '@/router/index.js'
 import GlsxVueComponents from 'glsx-vue-components'
 import 'glsx-vue-components/dist/glsx-vue-components.css'
 import GlsxVueCommon from 'glsx-vue-common'
+import config from './config'
 {{#lodash}}
 //import _ from 'lodash'
 {{/lodash}}
 
 Vue.use(GlsxVueComponents)
-Vue.use(GlsxVueCommon)
+Vue.use(GlsxVueCommon, config)
 
 var mixin = {
   mounted () {
