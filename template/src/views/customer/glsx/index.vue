@@ -1,14 +1,12 @@
-<!-- 主页 -->
+<!--  -->
 <template>
-  <div>我是主页！</div>
+  <div>广联赛讯主页http://www.glsx.com.cn/</div>
 </template>
 
 <script>
 export default {
-  name: 'layout',
-  data () {
+  data() {
     return {
-
     }
   }
 }
