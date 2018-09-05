@@ -13,17 +13,16 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import GlsxVueComponets from 'glsx-vue-components'
 import GlsxVueAdmin from 'glsx-vue-admin'
 import GlsxVueCommon from 'glsx-vue-common'
-import config from './config'
+import { admin, common } from '@/config'
 import store from './store'
 import i18n from './lang'
-
 {{#router}}
 import router from './router'
 {{/router}}
 
 Vue.use(GlsxVueComponets)
-Vue.use(GlsxVueCommon)
-Vue.use(GlsxVueAdmin, config)
+Vue.use(GlsxVueCommon, common)
+Vue.use(GlsxVueAdmin, admin)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -32,13 +31,7 @@ new Vue({
   {{#router}}
   router,
   {{/router}}
-  {{#if_eq build "runtime"}}
-  render: h => h(App),
-  {{/if_eq}}
   store,
   i18n,
-  {{#if_eq build "standalone"}}
-  components: { App },
-  template: '<App/>'
-  {{/if_eq}}
+  render: h => h(App)
 })
