@@ -6,13 +6,13 @@ import Vue from 'vue'
 import GlsxVueComponents from 'glsx-vue-components'
 import 'glsx-vue-components/dist/glsx-vue-components.css'
 import GlsxVueCommon from 'glsx-vue-common'
-import config from './config'
+import { common } from './config'
 {{#lodash}}
 // import _ from 'lodash'
 {{/lodash}}
 
 Vue.use(GlsxVueComponents)
-Vue.use(GlsxVueCommon, config)
+Vue.use(GlsxVueCommon, common)
 
 var mixin = {
   mounted() {
