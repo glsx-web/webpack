@@ -1,6 +1,8 @@
 <!--  -->
 <template>
-  <div>广联赛讯主页http://www.glsx.com.cn/</div>
+  <div>
+    <a href="http://www.glsx.com.cn/">广联赛讯主页</a>
+  </div>
 </template>
 
 <script>
