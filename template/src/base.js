@@ -5,14 +5,17 @@ import Vue from 'vue'
 // import router from '@/router/index.js'
 import GlsxVueComponents from 'glsx-vue-components'
 import 'glsx-vue-components/dist/glsx-vue-components.css'
-import GlsxVueCommon from 'glsx-vue-common'
-import { common } from './config'
+// import GlsxVueCommon from 'glsx-vue-common'
+// import { common } from './config'
 {{#lodash}}
 // import _ from 'lodash'
 {{/lodash}}
+{{#axios}}
+// import axios from 'axios'
+{{/axios}}
 
 Vue.use(GlsxVueComponents)
-Vue.use(GlsxVueCommon, common)
+// Vue.use(GlsxVueCommon, common)
 
 var mixin = {
   mounted() {
@@ -37,7 +40,19 @@ var mixin = {
     })
   }
 }
-
+const URL = ' http://192.168.3.171:7300/mock/5be17454f31545347559d499/config'
+const getConfig = (url = URL + '/authority_common') => {
+  return new Promise(resolve => {
+    const xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        resolve({ 'vue': Vue, 'config': JSON.parse(xhr.responseText) })
+      }
+    }
+    xhr.open('GET', url)
+    xhr.send()
+  })
+}
 /* eslint-disable no-new */
 const render = App => {
   new Vue({
@@ -46,4 +61,5 @@ const render = App => {
     render: h => h(App)
   })
 }
-export default { render }
+
+export default { render, getConfig }
