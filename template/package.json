@@ -25,8 +25,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "0.17.1",
     "glsx-vue-admin": "^2.0.10",
-    "glsx-vue-common": "^1.1.9",
+    "glsx-vue-common": "^1.1.17",
     "glsx-vue-components": "^1.0.13",
     "vue": "^2.5.17"{{#router}},
     "vue-router": "^3.0.1"{{/router}},
