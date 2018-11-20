@@ -27,7 +27,7 @@ import router from './router'
 // Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-(async() => {
+(async () => {
   const URL = 'http://192.168.3.171:7300/mock/5be17454f31545347559d499/config'
   const admin = await axios.get(URL + '/admin')
   const common = await axios.get(URL + '/admin_common')
@@ -43,4 +43,4 @@ import router from './router'
     i18n,
     render: h => h(App)
   })
-})
+})()

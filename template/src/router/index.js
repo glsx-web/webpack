@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Layout from '@/views/layout'
 // const _import = require('./_import_' + process.env.NODE_ENV)
 // import { GlCommon } from 'glsx-vue-common'
 // const { GetToken } = GlCommon
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 Vue.use(Router)
 /* Layout */
-import Layout from '@/views/layout'
 const GlAppLogin = { template: '<gl-app-login />' }
 const GlAppHome = { template: '<gl-app-home />' }
 const GlAppDashboard = { template: '<gl-app-dashboard />' }

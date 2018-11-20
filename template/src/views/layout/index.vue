@@ -31,4 +31,3 @@ export default {
       transition: all 1s linear
     }
 </style>
-
