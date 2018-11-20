@@ -1,12 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-// import App from './App'
-// import router from '@/router/index.js'
 import GlsxVueComponents from 'glsx-vue-components'
 import 'glsx-vue-components/dist/glsx-vue-components.css'
-// import GlsxVueCommon from 'glsx-vue-common'
-// import { common } from './config'
 {{#lodash}}
 // import _ from 'lodash'
 {{/lodash}}
@@ -15,7 +11,6 @@ import 'glsx-vue-components/dist/glsx-vue-components.css'
 {{/axios}}
 
 Vue.use(GlsxVueComponents)
-// Vue.use(GlsxVueCommon, common)
 
 var mixin = {
   mounted() {
