@@ -68,6 +68,7 @@ module.exports = {
       message: 'Install lodash?\n(Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。)',
     },
     axios: {
+      when: 'isNotTest',
       type: 'confirm',
       message: 'Install axios?'
     }
