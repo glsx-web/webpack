@@ -169,12 +169,12 @@ module.exports = {
     'build/webpack.test.conf.js': "unit && runner === 'karma'",
     'test/unit/**/*': 'unit',
     'test/unit/index.js': "unit && runner === 'karma'",
-    // 'test/unit/jest.conf.js': "unit && runner === 'jest'",
+    'test/unit/jest.conf.js': "unit && runner === 'jest'",
     'test/unit/karma.conf.js': "unit && runner === 'karma'",
     'test/unit/specs/index.js': "unit && runner === 'karma'",
     'test/unit/setup.js': "unit && runner === 'jest'",
     'test/e2e/**/*': 'e2e',
-    'src/router/**/*': 'router',
+    // 'src/router/**/*': 'router',
   },
   complete: function(data, { chalk }) {
     const green = chalk.green
