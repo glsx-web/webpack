@@ -160,7 +160,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Install normalize.css?\n(normalize.css 使浏览器更加一致地呈现所有元素并符合现代标准。)',
-    },
+    }
   },
   filters: {
     '.eslintrc.js': 'lint',
