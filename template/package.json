@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    {{#lint}}
+    "build": "vue-cli-service build"
+    {{#lint}},
     "lint": "vue-cli-service lint"
     {{/lint}}
   },
@@ -17,8 +17,8 @@
     "glsx-vue-components": "^1.0.13",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
-    "vue": "^2.5.17",
-    {{#lodash}}
+    "vue": "^2.5.17"
+    {{#lodash}},
     "lodash": "^4.17.10"
     {{/lodash}}
   },
