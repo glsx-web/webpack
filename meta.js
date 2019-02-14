@@ -94,7 +94,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Install axios?'
-    }
+    },
   },
   filters: {
     '.eslintrc.js': 'lint',
