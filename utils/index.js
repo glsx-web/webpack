@@ -75,7 +75,7 @@ To get started:
   ${yellow(
     `${data.inPlace ? '' : `cd ${data.destDirName}\n  `}${installMsg(
       data
-    )}${lintMsg(data)}npm run serve--------`
+    )}${lintMsg(data)}npm run serve`
   )}
   
 Documentation can be found at https://vuejs-templates.github.io/webpack
