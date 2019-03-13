@@ -36,7 +36,7 @@ var mixin = {
   }
 }
 const URL = ' http://192.168.3.171:7300/mock/5be17454f31545347559d499/config'
-const getConfig = (url = URL + {{ config }}) => {
+const getConfig = (url = URL + '{{ config }}') => {
   return new Promise(resolve => {
     const xhr = new XMLHttpRequest()
     xhr.onreadystatechange = () => {
