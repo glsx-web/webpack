@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import GlsxVueComponents from 'glsx-vue-components'
 import 'glsx-vue-components/dist/glsx-vue-components.css'
+import { Request as request } from 'glsx-vue-common'
+
 {{#lodash}}
 // import _ from 'lodash'
 {{/lodash}}
@@ -37,15 +39,14 @@ var mixin = {
 }
 const URL = ' http://192.168.3.171:7300/mock/5be17454f31545347559d499/config'
 const getConfig = (url = URL + '{{ config }}') => {
-  return new Promise(resolve => {
-    const xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        resolve({ 'vue': Vue, 'config': JSON.parse(xhr.responseText) })
+  return new Promise((resolve, reject) => {
+    request({ url }).then(res => {
+      if (res.status === 'success') {
+        resolve({ 'vue': Vue, 'config': JSON.parse(res.data) })
+      } else {
+        reject('ERROR.')
       }
-    }
-    xhr.open('GET', url)
-    xhr.send()
+    })
   })
 }
 /* eslint-disable no-new */
