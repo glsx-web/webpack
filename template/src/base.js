@@ -37,7 +37,7 @@ var mixin = {
     })
   }
 }
-const URL = ' http://192.168.3.171:7300/mock/5be17454f31545347559d499/config'
+const URL = 'http://oss-config.test.glsx.com.cn/mock/5be17454f31545347559d499/config'
 const getConfig = (url = URL + '{{ config }}') => {
   return new Promise((resolve, reject) => {
     request({ url }).then(res => {
