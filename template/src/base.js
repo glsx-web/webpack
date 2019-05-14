@@ -38,7 +38,7 @@ var mixin = {
   }
 }
 const URL = 'http://oss-config.test.glsx.com.cn/mock/5be17454f31545347559d499/config'
-const getConfig = (url = URL + '{{ config }}') => {
+const getConfig = (url = URL + '/{{ config }}') => {
   return new Promise((resolve, reject) => {
     request({ url }).then(res => {
       if (res.status === 'success') {
