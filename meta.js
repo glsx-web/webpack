@@ -100,7 +100,7 @@ module.exports = {
       type: 'string',
       require: true,
       message: '输入配置config的路径',
-      default: prompts.name
+      default: 'project_name_config'
     },
   },
   filters: {
