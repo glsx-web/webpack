@@ -101,7 +101,7 @@ module.exports = {
       require: true,
       message: '输入配置config的路径',
       // default: 'projectname_config'
-      default: this.$options.prompts
+      default: this.$options
     },
   },
   filters: {
