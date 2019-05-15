@@ -20,7 +20,7 @@ module.exports = {
   },
   helpers: {
     if_or(v1, v2, options) {
-
+      
       if (v1 || v2) {
         return options.fn(this)
       }
@@ -100,8 +100,8 @@ module.exports = {
       type: 'string',
       require: true,
       message: '输入配置config的路径',
-      // default: 'projectname_config'
-      default: this.$options.name
+      default: 'projectname_config'
+      // default: this.$options.name
     },
   },
   filters: {
