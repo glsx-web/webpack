@@ -1,16 +1,17 @@
-/*
- * @Author: limin
- * @Date: 2018-06-25 10:29:36
- * @Last Modified by: limin
- * @Last Modified time: 2018-07-13 17:32:12
- */
 import Vue from 'vue'
 import Vuex from 'vuex'
+
+import d2admin, { storeResets } from './modules/d2admin'
+Vue.prototype.$StoreReset = function() {
+  return new Promise(resolve => {
+    storeResets.forEach(reset => this.dispatch(reset))
+    resolve()
+  })
+}
 Vue.use(Vuex)
-import { GlAppStore } from 'glsx-vue-admin'
-const store = new Vuex.Store({
+
+export default new Vuex.Store({
   modules: {
-    ...GlAppStore
+    d2admin
   }
 })
-export default store
