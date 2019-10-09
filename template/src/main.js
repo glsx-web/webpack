@@ -1,26 +1,52 @@
-{{#if_eq build "standalone"}}
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-{{/if_eq}}
+// Vue
 import Vue from 'vue'
+// import i18n from './i18n'
 import App from './App'
-{{#router}}
+// 核心插件
+import d2Admin from '@/plugin/d2admin'
+// store
+import store from '@/store/index'
+
+// import D2Crud from '@d2-projects/d2-crud'
+// 菜单和路由设置
 import router from './router'
-{{/router}}
+// import menuHeader from '@/menu/header'
+// import menuAside from '@/menu/aside'
+// import { frameInRoutes } from '@/router/routes'
 
-Vue.config.productionTip = false
-
-/* eslint-disable no-new */
+// import VRM from 'vue-role-manager'
+// Vue.use(VRM, {
+//   router,
+//   redirect: '403',
+//   enabled: false
+// })
+// 核心插件
+Vue.use(d2Admin)
+// Vue.use(D2Crud)
 new Vue({
-  el: '#app',
-  {{#router}}
   router,
-  {{/router}}
-  {{#if_eq build "runtime"}}
-  render: h => h(App)
-  {{/if_eq}}
-  {{#if_eq build "standalone"}}
-  components: { App },
-  template: '<App/>'
-  {{/if_eq}}
-})
+  store,
+  // i18n,
+  render: h => h(App),
+  // created () {
+  // 处理路由 得到每一级的路由设置
+  // this.$store.commit('d2admin/page/init', frameInRoutes)
+  // 设置顶栏菜单 (暂时不需要)
+  // this.$store.commit('d2admin/menu/headerSet', menuHeader)
+  // 设置侧边栏菜单 (TODO 进行过滤)
+  // this.$store.commit('d2admin/menu/asideSet', menuAside)
+  // 初始化菜单搜索功能
+  // this.$store.commit('d2admin/search/init', menuHeader)
+  // },
+  mounted() {
+    Vue.config.devtools = true
+    // 展示系统信息
+    this.$store.commit('d2admin/releases/versionShow')
+    // 用户登录后从数据库加载一系列的设置
+    this.$store.dispatch('d2admin/account/load')
+    // 获取并记录用户 UA
+    this.$store.commit('d2admin/ua/get')
+    // 初始化全屏监听
+    this.$store.dispatch('d2admin/fullscreen/listen')
+  }
+}).$mount('#app')
