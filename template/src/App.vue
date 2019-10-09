@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <router-view />
+    <img src="./assets/logo.png">
+    {{#router}}
+    <router-view/>
+    {{else}}
+    <HelloWorld/>
+    {{/router}}
   </div>
 </template>
 
 <script>
-// import util from '@/libs/util'
-// export default {
-//   name: 'app',
-//   watch: {
-//     '$i18n.locale': 'i18nHandle'
-//   },
-//   created () {
-//     this.i18nHandle(this.$i18n.locale)
-//   },
-//   methods: {
-//     i18nHandle (val, oldVal) {
-//       util.cookies.set('lang', val)
-//       document.querySelector('html').setAttribute('lang', val)
-//     }
-//   }
-// }
+{{#unless router}}
+import HelloWorld from './components/HelloWorld'
+
+{{/unless}}
+export default {
+  name: 'App'{{#router}}{{else}},
+  components: {
+    HelloWorld
+  }{{/router}}
+}
 </script>
 
-<style lang="scss">
-@import "~@/assets/style/public-class.scss";
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>
