@@ -85,23 +85,23 @@ module.exports = {
         },
       ],
     },
-    // lodash: {
-    //   when: 'isNotTest',
-    //   type: 'confirm',
-    //   message: 'Install lodash?\n(Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。)',
-    // },
+    lodash: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Install lodash?\n(Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。)',
+    },
     axios: {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Install axios?'
     },
-    // config: {
-    //   when: 'isNotTest',
-    //   type: 'string',
-    //   require: true,
-    //   message: '输入配置config的路径',
-    //   default: 'projectname_config'
-    // },
+    config: {
+      when: 'isNotTest',
+      type: 'string',
+      require: true,
+      message: '输入配置config的路径',
+      default: 'projectname_config'
+    },
   },
   filters: {
     '.eslintrc.js': 'lint',
