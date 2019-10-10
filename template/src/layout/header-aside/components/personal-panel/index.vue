@@ -17,7 +17,7 @@
         <div class="registe-info">
           <span class="registe-info">
             <d2-el-icon name="time" />
-            有效期：{{user.validTime || '未知' }}
+            有效期：{{ user.validTime || '未知' }}
           </span>
         </div>
       </div>
