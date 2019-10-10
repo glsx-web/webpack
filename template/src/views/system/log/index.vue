@@ -23,7 +23,7 @@
         align="center"
         min-width="200">
         <template slot-scope="scope">
-          {{get(scope.row, 'meta.url')}}
+          {{ get(scope.row, 'meta.url') }}
         </template>
       </el-table-column>
       <!-- 触发组件 -->

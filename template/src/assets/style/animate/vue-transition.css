@@ -1,0 +1,36 @@
+.fade-transverse-leave-active,
+.fade-transverse-enter-active {
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.fade-transverse-enter {
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+          transform: translateX(30px);
+}
+
+.fade-transverse-leave-to {
+  opacity: 0;
+  -webkit-transform: translateX(-30px);
+          transform: translateX(-30px);
+}
+
+.fade-scale-leave-active,
+.fade-scale-enter-active {
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.fade-scale-enter {
+  opacity: 0;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.fade-scale-leave-to {
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+/*# sourceMappingURL=vue-transition.css.map */
