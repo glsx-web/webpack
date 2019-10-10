@@ -18,16 +18,16 @@
         label="Message">
       </el-table-column>
       <!-- 触发页面 -->
-      <el-table-column
+      <!-- <el-table-column
         label="Url"
         align="center"
         min-width="200">
         <template slot-scope="scope">
           {{get(scope.row, 'meta.url')}}
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <!-- 触发组件 -->
-      <el-table-column
+      <!-- <el-table-column
         label="Tag"
         align="center"
         min-width="120">
@@ -39,7 +39,7 @@
             &#60;{{get(scope.row, 'meta.instance.$vnode.componentOptions.tag')}}&gt;
           </el-tag>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <!-- 查看详情 -->
       <el-table-column
         fixed="right"
