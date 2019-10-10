@@ -12,7 +12,7 @@
           ></el-avatar>
         </div>
         <div class="name-role">
-          <span class="sender">{{ user.userName }} - {{ user.postName }}</span>
+          <span class="sender">{{user.userName}} - {{user.postName}}</span>
         </div>
         <div class="registe-info">
           <span class="registe-info">

@@ -24,7 +24,7 @@
         :min-width="item.minWidth"
         :align="item.align||'center'"
       >
-        <template slot-scope="scope">
+        <!-- <template slot-scope="scope">
           <template v-if="item.tagLabel">
             <el-tag v-if="!item.tagName"
               :type="tableParams.tag.type[scope.row[item.prop]]"
@@ -44,7 +44,7 @@
           <template v-else>
             {{tableData[scope.$index][item.prop]}}
           </template>
-        </template>
+        </template> -->
       </el-table-column>
       <el-table-column
         v-if="tableParams.tableOption"
