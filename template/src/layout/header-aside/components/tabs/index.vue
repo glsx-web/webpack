@@ -22,7 +22,7 @@
             v-for="page in opened"
             :key="page.fullPath"
             :name="page.fullPath">
-            <span slot="label"><d2-el-icon :name="page.meta.icon"/> {{(page.meta && page.meta.title) || '未命名'}}</span>
+            <span slot="label"><d2-el-icon :name="page.meta.icon"/> {{ page.meta && page.meta.title }}</span>
           </el-tab-pane>
         </el-tabs>
       </div>
