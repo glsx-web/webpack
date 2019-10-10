@@ -24,11 +24,6 @@
         :min-width="item.minWidth"
         :align="item.align||'center'"
       >
-        <template slot-scope="scope">
-          <template>
-            {{tableData[scope.$index][item.prop]}}
-          </template>
-        </template>
       </el-table-column>
       <el-table-column
         v-if="tableParams.tableOption"
