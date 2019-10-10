@@ -18,7 +18,7 @@ $ npm install -g vue-cli
 $ vue init webpack my-project
 $ cd my-project
 $ npm install
-$ npm run dev
+$ npm run serve
 ```
 
 This will scaffold the project using the `master` branch. If you wish to use the latest version of the webpack template, do the following instead:
