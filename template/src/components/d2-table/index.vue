@@ -24,27 +24,6 @@
         :min-width="item.minWidth"
         :align="item.align||'center'"
       >
-        <!-- <template slot-scope="scope">
-          <template v-if="item.tagLabel">
-            <el-tag v-if="!item.tagName"
-              :type="tableParams.tag.type[scope.row[item.prop]]"
-              >{{tableParams.tag.label[scope.row[item.prop]]}}
-            </el-tag>
-            <el-tag v-else
-              :type="tableParams[item.tagName].type[scope.row[item.prop]]"
-              >{{tableParams[item.tagName].label[scope.row[item.prop]]}}
-            </el-tag>
-          </template>
-          <template v-else-if="item.formatter">
-            {{item.formatter(scope.row)}}
-          </template>
-          <template v-else-if="getListApi">
-            {{data[scope.$index][item.prop]}}
-          </template>
-          <template v-else>
-            {{tableData[scope.$index][item.prop]}}
-          </template>
-        </template> -->
       </el-table-column>
       <el-table-column
         v-if="tableParams.tableOption"
