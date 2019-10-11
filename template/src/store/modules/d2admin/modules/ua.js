@@ -1,0 +1,17 @@
+import UAParser from 'ua-parser-js'
+export default {
+  namespaced: true,
+  state: {
+    // 用户 UA
+    data: {}
+  },
+  mutations: {
+    /**
+     * @description 记录 UA
+     * @param {Object} state state
+     */
+    get(state) {
+      state.data = new UAParser().getResult()
+    }
+  }
+}

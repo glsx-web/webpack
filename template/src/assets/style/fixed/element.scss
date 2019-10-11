@@ -1,0 +1,59 @@
+// element 样式补丁
+.el-card {
+  &.is-always-shadow {
+    box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
+  }
+  &.is-hover-shadow {
+    &:hover {
+      box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
+    }
+  }
+}
+
+.el-menu--horizontal {
+  border-bottom: none !important;
+}
+
+.el-tabs__item:focus.is-active.is-focus:not(:active) {
+  box-shadow: none !important;
+}
+.el-color-picker__trigger{
+  border-color:rgba(255,255,255,.1)
+}
+.el-table{
+  &--medium td{
+    padding: 10px 0 !important;
+    .el-button--text{
+      padding: 0px 0px;
+    }
+    .cell{
+      .el-tag{
+        width: 80px;
+        font-size: 13px;
+      }
+    }
+  }
+  margin:4px 0 !important;
+}
+.el-dialog{
+  margin-top: 6vh !important;
+  &__body{
+    padding:20px;
+    .el-form-item{
+      margin-bottom: 16px;
+    }
+  }
+  &__footer {
+    .el-button {
+      width: 150px;
+    }
+  }
+}
+.table-header{
+  height: 40px; 
+  line-height: 40px;
+  color: #909399;
+  .el-col:nth-child(2){
+    position: relative; display: flex; justify-content: flex-end;
+  }
+}
