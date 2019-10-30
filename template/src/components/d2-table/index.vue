@@ -26,7 +26,7 @@
       >
         <template slot-scope="scope">
           <template v-if="item.tagLabel">
-            /* eslint-disable */
+            /* eslint-disable no-alert, no-console */
             <el-tag
               v-if="!item.tagName"
               :type="tableParams.tag.type[scope.row[item.prop]]"
@@ -37,7 +37,7 @@
               :type="tableParams[item.tagName].type[scope.row[item.prop]]"
             >{{tableParams[item.tagName].label[scope.row[item.prop]]}}
             </el-tag>
-            /* eslint-enable */
+            /* eslint-enable no-alert, no-console */
           </template>
           <template v-else-if="item.formatter">
             {{item.formatter(scope.row)}}
