@@ -22,7 +22,8 @@
         label="Url"
         align="center"
         min-width="200">
-        <template slot-scope="scope" v-text="get(scope.row, 'meta.url')">
+        <template slot-scope="scope">
+          <p v-text="get(scope.row, 'meta.url')"></p>
         </template>
       </el-table-column>
       <!-- 触发组件 -->
