@@ -14,6 +14,12 @@
         <div class="name-role">
           <span class="sender">{{ user.userName }} - {{ user.postName }}</span>
         </div>
+        <div class="registe-info">
+          <span class="registe-info">
+            <d2-el-icon name="time" />
+            有效期：{{user.validTime || '未知' }}
+          </span>
+        </div>
       </div>
       <!-- <div class="personal-relation">
         <span class="relation-item">followers</span>

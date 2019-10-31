@@ -109,8 +109,7 @@ export default {
         }, {
           label: '状态',
           prop: 'status',
-          tagLabel: true,
-          width: '140'
+          tagLabel: true
         }]
       },
       getListApi: getListApi
