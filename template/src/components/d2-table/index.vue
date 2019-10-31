@@ -37,13 +37,13 @@
               ></el-tag>
           </template>
           <template v-else-if="item.formatter">
-            <span v-text="item.formatter(scope.row)"></span>
+            {{item.formatter(scope.row)}}
           </template>
           <template v-else-if="getListApi">
-            {{data[scope.$index][item.prop]}}
+            <p v-text="data[scope.$index][item.prop]"></p>
           </template>
           <template v-else>
-            {{tableData[scope.$index][item.prop]}}
+            <p v-text="tableData[scope.$index][item.prop]"></p>
           </template>
         </template>
       </el-table-column>
