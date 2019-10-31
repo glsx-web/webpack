@@ -30,7 +30,8 @@
             <el-tag
               v-if="!item.tagName"
               :type="tableParams.tag.type[scope.row[item.prop]]"
-            >{{tableParams.tag.label[+scope.row[item.prop]]}}
+              :aa="tableParams.tag.label[+scope.row[item.prop]]"
+            >{{aa}}
             </el-tag>
             <el-tag
               v-else
