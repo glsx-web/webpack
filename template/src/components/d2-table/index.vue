@@ -37,7 +37,7 @@
               ></el-tag>
           </template>
           <template v-else-if="item.formatter">
-            {{item.formatter(scope.row)}}
+            <span v-text="item.formatter(scope.row)"></span>
           </template>
           <template v-else-if="getListApi">
             {{data[scope.$index][item.prop]}}
