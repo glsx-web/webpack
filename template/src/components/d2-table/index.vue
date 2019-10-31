@@ -27,11 +27,10 @@
         <template slot-scope="scope">
           <template v-if="item.tagLabel">
             /* eslint-disable no-alert, no-console */
-            <el-tag
+            <el-tag 
               v-if="!item.tagName"
               :type="tableParams.tag.type[scope.row[item.prop]]"
-              :aa="tableParams.tag.label[+scope.row[item.prop]]"
-            >{{aa}}
+              ><a v-text="tableParams.tag.label[scope.row[item.prop]]"></a>
             </el-tag>
             <el-tag
               v-else
