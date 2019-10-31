@@ -1,33 +1,32 @@
-<!-- <template>
+<template>
   <d2-container>
     <el-table
       :data="log"
       size="mini"
       style="width: 100%"
       empty-text="暂无日志信息"
-      stripe> -->
+      stripe>
       <!-- 时间 -->
-<!-- <el-table-column
+      <el-table-column
         prop="time"
         label="Time"
         width="140">
-      </el-table-column> -->
+      </el-table-column>
       <!-- 信息 -->
-<!-- <el-table-column
+      <el-table-column
         prop="message"
         label="Message">
-      </el-table-column> -->
+      </el-table-column>
       <!-- 触发页面 -->
- <!-- <el-table-column
+      <el-table-column
         label="Url"
         align="center"
         min-width="200">
-        <template slot-scope="scope">
-          {{get(scope.row, 'meta.url')}}
+        <template slot-scope="scope" v-text="get(scope.row, 'meta.url')">
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <!-- 触发组件 -->
- <!-- <el-table-column
+      <el-table-column
         label="Tag"
         align="center"
         min-width="120">
@@ -35,13 +34,13 @@
           <el-tag
             v-if="get(scope.row, 'meta.instance.$vnode.componentOptions.tag')"
             type="info"
-            size="mini">
-            &#60;{{get(scope.row, 'meta.instance.$vnode.componentOptions.tag')}}&gt;
+            size="mini"
+            v-text="get(scope.row, 'meta.instance.$vnode.componentOptions.tag')">
           </el-tag>
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <!-- 查看详情 -->
-<!--  <el-table-column
+      <el-table-column
         fixed="right"
         align="center"
         label="More"
@@ -67,9 +66,9 @@
       </el-button>
     </template>
   </d2-container>
-</template> -->
+</template>
 
-<!-- <script>
+<script>
 import { mapState } from 'vuex'
 export default {
   data() {
@@ -117,4 +116,4 @@ export default {
     }
   }
 }
-</script> -->
+</script>
