@@ -33,8 +33,8 @@
             </el-tag>
             <el-tag v-else
               :type="tableParams[item.tagName].type[scope.row[item.prop]]"
-              >{{tableParams[item.tagName].label[scope.row[item.prop]]}}
-            </el-tag>
+              v-text="tableParams[item.tagName].label[scope.row[item.prop]]"
+              ></el-tag>
           </template>
           <template v-else-if="item.formatter">
             {{item.formatter(scope.row)}}
