@@ -36,9 +36,6 @@
               v-text="tableParams[item.tagName].label[scope.row[item.prop]]"
               ></el-tag>
           </template>
-          <template v-else-if="item.formatter">
-            {{item.formatter(scope.row)}}
-          </template>
           <template v-else-if="getListApi">
             <p v-text="data[scope.$index][item.prop]"></p>
           </template>
