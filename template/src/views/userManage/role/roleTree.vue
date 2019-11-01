@@ -11,7 +11,7 @@
       :expand-on-click-node="true"
     >
       <span class="role-tree-node" slot-scope="{ node, data }">
-        <span v-text="node.label"></span>
+        <p v-text="node.label"></p>
         <div class="role-tree-auth">
           <template v-if="data.auth">
             <el-checkbox-group size="mini" v-model="checked">
@@ -20,7 +20,8 @@
                 :key="index"
                 :label="btn.authId"
                 @change="(sta)=>btnChange(node,btn,sta)"
-              >{{btn.label}}</el-checkbox>
+              ><p v-text="btn.label"></p>
+              </el-checkbox>
             </el-checkbox-group>
           </template>
         </div>
