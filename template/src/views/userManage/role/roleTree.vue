@@ -132,7 +132,6 @@ export default {
     white-space: normal;
     position: absolute;
     left: 200px;
-    background-color: rgba(0, 0, 0, 0.05);
     padding: 5px 0;
   }
 }
