@@ -20,7 +20,7 @@
                 :key="index"
                 :label="btn.authId"
                 @change="(sta)=>btnChange(node,btn,sta)"
-              ><span v-text="btn.label"></span></el-checkbox>
+              >{{btn.label}}</el-checkbox>
             </el-checkbox-group>
           </template>
         </div>
