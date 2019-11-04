@@ -2,7 +2,7 @@
   <el-row class="table-header">
     <el-col :span="12">
       <d2-el-icon name="s-grid" />
-       {{title}}
+      <span v-text="title"></span>
     </el-col>
     <el-col :span="12">
       <slot></slot>
