@@ -1,7 +1,7 @@
 <template>
   <el-row class="table-header">
     <el-col :span="12">
-      <d2-el-icon name="s-grid"></d2-el-icon>
+      <d2-el-icon name="s-grid" />
        {{title}}
     </el-col>
     <el-col :span="12">
