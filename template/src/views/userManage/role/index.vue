@@ -75,7 +75,7 @@ export default {
 
     async handleEdit(row) {
       // this.editData = row && await RoleDetail({ roleId: row.roleId })
-      this.editData = Object.assign(row, await RoleDetail({ roleId: row.roleId }))
+      this.editData = row && Object.assign(row, await RoleDetail({ roleId: row.roleId }))
       this.editVisible = true
     }
   }
