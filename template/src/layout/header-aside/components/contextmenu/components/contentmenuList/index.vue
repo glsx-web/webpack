@@ -13,7 +13,8 @@
         :name="item.icon"/>
       <div
         class="d2-contentmenu-item-title"
-        flex-box="1">{{item.title}}
+        flex-box="1"
+        v-text="item.title">
       </div>
     </div>
   </div>
