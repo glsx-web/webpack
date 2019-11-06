@@ -32,43 +32,17 @@
       flex-box="0">
       <el-button-group>
         <el-button icon="el-icon-error" @click="closeAll"></el-button>
+        <el-tooltip class="item" effect="dark" :content="cacheTip" placement="bottom">
+          <el-button :icon="kaIcon" @click="handleCache"></el-button>
+        </el-tooltip>
         <el-button icon="el-icon-refresh" @click="reload" :disabled="current==='/index'"></el-button>
       </el-button-group>
-       <!-- <el-dropdown
-        size="default"
-        split-button
-        @click="closeAll"
-        @command="command => handleControlItemClick(command)">
-        <d2-el-icon name="error"/>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="reload">
-            <d2-el-icon name="refresh"/>
-            刷新
-          </el-dropdown-item>
-         <el-dropdown-item command="left">
-            <d2-el-icon name="back" class="d2-mr-10"/>
-            关闭左侧
-          </el-dropdown-item>
-          <el-dropdown-item command="right">
-            <d2-el-icon name="right" class="d2-mr-10"/>
-            关闭右侧
-          </el-dropdown-item>
-          <el-dropdown-item command="other">
-            <d2-el-icon name="circle-close" class="d2-mr-10"/>
-            关闭其它
-          </el-dropdown-item>
-          <el-dropdown-item command="all">
-            <d2-el-icon name="error" class="d2-mr-10"/>
-            全部关闭
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>-->
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 const CMD_MAP = {
   'left': 'closeLeft',
   'right': 'closeRight',
@@ -101,8 +75,20 @@ export default {
   computed: {
     ...mapState('d2admin/page', [
       'opened',
-      'current'
-    ])
+      'current',
+      'keepAlive'
+    ]),
+    isCached() {
+      const _curPage = this.opened.find(page => page.fullPath === this.current)
+      const _cache = _curPage && _curPage.meta.cache
+      return _cache
+    },
+    cacheTip() {
+      return this.isCached ? '已缓存当前页面数据' : '不缓存当前页面数据'
+    },
+    kaIcon() {
+      return this.isCached ? 'el-icon-star-on' : 'el-icon-star-off'
+    }
   },
   mounted() {
     this.$event.$on('e-reload', this.reload)
@@ -113,15 +99,15 @@ export default {
       'closeLeft',
       'closeRight',
       'closeOther',
-      'closeAll'
+      'closeAll',
+      'keepAliveRemove',
+      'keepAlivePush'
     ]),
-    ...mapMutations('d2admin/page', ['keepAliveRemove', 'keepAlivePush']),
     /**
      * @description 右键菜单功能点击
      */
     handleContextmenu(event) {
       let target = event.target
-      // 解决 https://github.com/d2-projects/d2-admin/issues/54
       let flag = false
       if (target.className.indexOf('el-tabs__item') > -1) flag = true
       else if (target.parentNode.className.indexOf('el-tabs__item') > -1) {
@@ -166,16 +152,21 @@ export default {
         this.$router.push({ name, params, query })
       }
     },
+    handleCache() {
+      this[this.isCached ? 'keepAliveRemove' : 'keepAlivePush'](this.$router.currentRoute.name)
+    },
     async reload() {
-      const name = this.$router.currentRoute.name
-      await this.keepAliveRemove(name)
-      await this.$router.replace('/refresh')
-      var __timer = setInterval(() => {
-        if (this.$router.currentRoute.name === name) {
-          clearInterval(__timer)
-          this.keepAlivePush(name)
-        }
-      }, 10)
+      if (this.isCached) {
+        const name = this.$router.currentRoute.name
+        await this.keepAliveRemove(name)
+        var __timer = setInterval(() => {
+          if (this.$router.currentRoute.name === name) {
+            clearInterval(__timer)
+            this.keepAlivePush(name)
+          }
+        }, 10)
+      }
+      this.$router.replace('/refresh')
     },
     /**
      * @description 点击 tab 上的删除按钮触发这里 首页的删除按钮已经隐藏 因此这里不用判断是 index

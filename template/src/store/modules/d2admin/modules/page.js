@@ -162,7 +162,7 @@ export default {
         state.opened.push(newTag)
         // 如果这个页面需要缓存 将其添加到缓存设置
         if (isKeepAlive(newTag)) {
-          commit('keepAlivePush', tag.name)
+          dispatch('keepAlivePush', tag.name)
         }
         // 持久化
         await dispatch('opend2db')
@@ -243,7 +243,7 @@ export default {
         const index = state.opened.findIndex(page => page.fullPath === tagName)
         if (index >= 0) {
           // 如果这个页面是缓存的页面 将其在缓存设置中删除
-          commit('keepAliveRemove', state.opened[index].name)
+          dispatch('keepAliveRemove', state.opened[index].name)
           // 更新数据 删除关闭的页面
           state.opened.splice(index, 1)
         }
@@ -383,7 +383,7 @@ export default {
      * @description 私有公共方法
      * @param {Object} context
      */
-    _splice({ state, commit }, { index, howmany }) {
+    _splice({ state, dispatch }, { index, howmany }) {
       return new Promise(resolve => {
         let _clone = _.cloneDeep(state.opened)
         if (howmany !== undefined) {
@@ -391,7 +391,7 @@ export default {
         } else {
           _clone.splice(index)
         }
-        _clone.forEach(({ name }) => commit('keepAliveRemove', name))
+        _clone.forEach(({ name }) => dispatch('keepAliveRemove', name))
         state.opened = _clone
         resolve()
       })
@@ -458,6 +458,27 @@ export default {
         resolve()
       })
     },
+    /**
+     * @description 删除一个页面的缓存设置
+     * @param {Object} state state
+     * @param {String} name name
+     */
+    keepAliveRemove({ state, dispatch }, name) {
+      state.keepAlive = state.keepAlive.filter(item => item !== name)
+      state.opened.find(page => page.name === name).meta.cache = false
+      dispatch('opend2db')
+    },
+    /**
+     * @description 增加一个页面的缓存设置
+     * @param {Object} state state
+     * @param {String} name name
+     */
+    keepAlivePush({ state, dispatch }, name) {
+      // const keep = [...state.keepAlive]
+      state.keepAlive.push(name)
+      state.opened.find(page => page.name === name).meta.cache = true
+      dispatch('opend2db')
+    },
     reset({ state }) {
       state.pool = []
       state.opened = [home]
@@ -469,7 +490,7 @@ export default {
   mutations: {
     /**
      * @class keepAlive
-     * @description 从已经打开的页面记录中更新需要缓存的页面记录
+     * @description 从已经打开���页面记录中更新需要缓存的页面记录
      * @param {Object} state state
      */
     keepAliveRefresh(state) {
