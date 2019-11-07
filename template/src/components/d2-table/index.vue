@@ -1,9 +1,10 @@
 <!-- 表格+分页 -->
 <template>
   <div>
-      <el-table
+    <!-- v-loading="$store.state.d2admin.loading.value" -->
+    <el-table
       :data="getListApi ? data : tableData"
-      v-loading="$store.state.d2admin.loading.value"
+      v-loading="loading"
       border
       :highlight-current-row="true"
       :stripe="true"
@@ -26,15 +27,17 @@
       >
         <template slot-scope="scope">
           <template v-if="item.tagLabel">
-            <el-tag v-if="!item.tagName"
+            <el-tag
+              v-if="!item.tagName"
               :type="tableParams.tag.type[scope.row[item.prop]]"
               v-text="tableParams.tag.label[scope.row[item.prop]]"
-              >
+            >
             </el-tag>
-            <el-tag v-else
+            <el-tag
+              v-else
               :type="tableParams[item.tagName].type[scope.row[item.prop]]"
               v-text="tableParams[item.tagName].label[scope.row[item.prop]]"
-              ></el-tag>
+            ></el-tag>
           </template>
           <template v-else-if="getListApi">
             <p v-text="data[scope.$index][item.prop]"></p>
@@ -52,7 +55,10 @@
         fixed="right"
       >
         <template slot-scope="scope">
-          <slot name="auth-button" :scope="scope.row"></slot>
+          <slot
+            name="auth-button"
+            :scope="scope.row"
+          ></slot>
         </template>
       </el-table-column>
     </el-table>
@@ -77,6 +83,7 @@ export default {
   name: 'd2-table',
   data() {
     return {
+      loading: false,
       oldValue: {},
       data: [],
       // 页码
@@ -158,6 +165,7 @@ export default {
       },
       deep: true
     },
+    // 调用其他接口，导致表格刷新-标识
     '$store.state.d2admin.refreshtable.value'(val) {
       this.refreshTable()
     }
@@ -172,15 +180,17 @@ export default {
   methods: {
 
     refreshTable() {
+      this.loading = true
       const params = {
         ...this.page,
         ...this.searchForm
       }
-      // console.log(params)
       this.getListApi(params).then(res => {
         this.data = res[this.tableParams.listName]
         res.pagination && (this.total = res.pagination.totalCount)
+        this.loading = false
       }).catch(() => {
+        this.loading = false
         notice.errorTips()
       })
     },
