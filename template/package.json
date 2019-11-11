@@ -2,7 +2,7 @@
   "name": "{{ name }}",
   "version": "{{ version }}",
   "description": "{{ description }}",
-  "author": "{{ author }}"
+  "author": "{{ author }}",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
