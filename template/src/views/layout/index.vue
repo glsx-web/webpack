@@ -14,7 +14,7 @@ export default {
   name: 'layout'
 }
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" scoped>
     .el-main{
       padding: 0 !important;
       transform: translateX(1px)
