@@ -34,7 +34,6 @@ module.exports = {
   
   prompts: {
     name: {
-      when: 'isNotTest',
       type: 'string',
       required: true,
       message: 'Project name',
@@ -46,24 +45,20 @@ module.exports = {
       default: '1.0.0'
     },
     description: {
-      when: 'isNotTest',
       type: 'type',
       require: false,
       message: 'Project description',
       default: 'A Vue.js project',
     },
     author: {
-      when: 'isNotTest',
       type: 'string',
       message: 'Author',
     },
     lint: {
-      when: 'isNotTest',
       type: 'confirm',
       message: 'Use ESLint to lint your code?',
     },
     autoInstall: {
-      when: 'isNotTest',
       type: 'list',
       message:
         'Should we run `npm install` for you after the project has been created? (recommended)',
@@ -86,17 +81,14 @@ module.exports = {
       ],
     },
     lodash: {
-      when: 'isNotTest',
       type: 'confirm',
       message: 'Install lodash?\n(Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。)',
     },
     axios: {
-      when: 'isNotTest',
       type: 'confirm',
       message: 'Install axios?'
     },
     config: {
-      when: 'isNotTest',
       type: 'string',
       require: true,
       message: '输入配置config的路径',
