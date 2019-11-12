@@ -98,7 +98,7 @@ module.exports = {
   filters: {
     '.eslintrc.js': 'lint',
     '.eslintignore': 'lint',
-    'src/views/test.js': 'axios'
+    'src/views/test.vue': 'axios'
   },
   complete: function(data, { chalk }) {
     const green = chalk.green
