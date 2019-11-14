@@ -1,7 +1,6 @@
 <!-- 表格+分页 -->
 <template>
   <div>
-    <!-- v-loading="$store.state.d2admin.loading.value" -->
     <el-table
       :data="getListApi ? data : tableData"
       v-loading="loading"
