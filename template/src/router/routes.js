@@ -83,18 +83,18 @@ export const resources = {
     component: _import('table1'),
     auth: [{
       authId: '1020101',
-      parentId: '102',
+      parentId: '10201',
       label: '编辑',
       handle: 'handleEdit'
     }, {
       authId: '1020102',
-      parentId: '102',
+      parentId: '10201',
       label: '删除',
       color: '#FF0000',
       handle: 'handleDelete'
     }, {
       authId: '1020103',
-      parentId: '102',
+      parentId: '10201',
       label: '添加',
       category: 'Button',
       type: 'button',
