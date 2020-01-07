@@ -35,7 +35,7 @@
             :momFlag="item.momFlag"
           ></slot>
           <template v-else-if="item.momFlag">
-            <div>{{scope.row[item.prop]}}
+            <div v-text="scope.row[item.prop]">
               <span
                 v-if="scope.row[item.momFlag] > 0"
                 class="el-icon-top"
@@ -60,9 +60,7 @@
               v-text="tableParams[item.tagName].label[scope.row[item.prop]]"
             ></el-tag>
           </template>
-          <template v-else-if="item.formatter">
-            {{item.formatter(scope.row)}}
-          </template>
+          <template v-else-if="item.formatter" v-text="item.formatter(scope.row)"></template>
           <template v-else-if="getListApi">
             <p v-text="data[scope.$index][item.prop]"></p>
           </template>
