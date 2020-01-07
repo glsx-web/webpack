@@ -13,7 +13,7 @@ function detailApi(data) {
 }
 
 function removeApi(data) {
-  data.refreshTable = true
+  // data.refreshTable = true
   data.method = `${path}delete`
   return request(data)
 }

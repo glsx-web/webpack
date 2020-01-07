@@ -2,7 +2,7 @@
  * @Author: limin
  * @Date: 2019-08-26 18:02:55
  * @Last Modified by: chenwq
- * @Last Modified time: 2019-09-29 10:15:46
+ * @Last Modified time: 2020-01-07 16:26:04
  */
 
 import request from './request'
@@ -31,7 +31,7 @@ export function AccountLogin(data) {
  */
 export function Reg(data = {}) {
   data.method = REG_URL
-  data.refreshTable = true
+  // data.refreshTable = true
   return request(data, RequestMethods.GET)
 }
 
@@ -58,7 +58,8 @@ export function UserList(data = {}) {
  * @param {*} data 参数
  */
 export function PassWordReset(data = {}) {
-  data.refreshTable = true
+  // ok--
+  // data.refreshTable = true
   data.method = `${USER_PATH}password.reset`
   return request(data, RequestMethods.GET)
 }
@@ -68,7 +69,7 @@ export function PassWordReset(data = {}) {
  * @param {*} data 参数
  */
 export function AccountModify(data = {}) {
-  data.refreshTable = true
+  // data.refreshTable = true
   data.method = `${USER_PATH}modify`
   return request(data, RequestMethods.GET)
 }
@@ -78,7 +79,8 @@ export function AccountModify(data = {}) {
  * @param {*} data 参数
  */
 export function AccountIncrease(data = {}) {
-  data.refreshTable = true
+  // ok--
+  // data.refreshTable = true
   data.method = `${USER_PATH}validity.increase`
   return request(data, RequestMethods.GET)
 }
@@ -88,7 +90,8 @@ export function AccountIncrease(data = {}) {
  * @param {*} data 参数
  */
 export function AccountForbidden(data = {}) {
-  data.refreshTable = true
+  // ok--
+  // data.refreshTable = true
   data.method = `${USER_PATH}forbidden`
   return request(data, RequestMethods.GET)
 }
@@ -98,7 +101,8 @@ export function AccountForbidden(data = {}) {
  * @param {*} data 参数
  */
 export function AccountActived(data = {}) {
-  data.refreshTable = true
+  // ok--
+  // data.refreshTable = true
   data.method = `${USER_PATH}actived`
   return request(data, RequestMethods.GET)
 }
@@ -108,7 +112,7 @@ export function AccountActived(data = {}) {
  * @param {*} data 参数
  */
 export function AccountValidate(data = {}) {
-  data.refreshTable = true
+  // data.refreshTable = true
   data.method = `${USER_PATH}check`
   return request(data, RequestMethods.GET)
 }
@@ -136,7 +140,8 @@ export function RoleAuthData(data = {}) {
  * @param {*} data 参数
  */
 export function RoleReg(data = {}) {
-  data.refreshTable = true
+  // ok--
+  // data.refreshTable = true
   data.method = `${ROLE_PATH}register`
   return request(data, RequestMethods.GET)
 }
@@ -146,7 +151,8 @@ export function RoleReg(data = {}) {
  * @param {*} data 参数
  */
 export function RoleModify(data = {}) {
-  data.refreshTable = true
+  // ok--
+  // data.refreshTable = true
   data.method = `${ROLE_PATH}modify`
   return request(data, RequestMethods.GET)
 }

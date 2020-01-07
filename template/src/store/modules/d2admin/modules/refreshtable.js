@@ -2,14 +2,15 @@
  * @Author: chenwq
  * @Date: 2019-09-27 11:39:49
  * @Last Modified by: chenwq
- * @Last Modified time: 2019-09-27 15:27:39
+ * @Last Modified time: 2020-01-07 11:15:33
  */
 
 export default {
   namespaced: true,
   state: {
     // 刷新表格
-    value: false
+    // noFresh - 不需要刷新；fresh - 需要刷新； needFresh - 刷新前标记
+    value: 'noFresh'
   },
   getters: {
     /**
@@ -34,7 +35,9 @@ export default {
     }
   },
   actions: {
-    reset({ state }) {
+    reset({
+      state
+    }) {
       state.value = false
     }
   }

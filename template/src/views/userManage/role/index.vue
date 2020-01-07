@@ -3,6 +3,7 @@
   <d2-container class="role">
     <d2-table-header title="角色列表"><auth-button category="action" label="创建角色"></auth-button></d2-table-header>
     <d2-table
+      ref="roleTable"
       :tableParams="tableParams"
       :pagination="pagination"
       :getListApi="getListApi"
@@ -65,6 +66,7 @@ export default {
       if (isReload) {
         const { roles } = await RoleList()
         this.set({ name: BaseData.ROLE.KEY, value: roles })
+        this.$refs.roleTable.refreshTable()
       }
       this.editVisible = false
     })

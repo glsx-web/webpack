@@ -25,6 +25,7 @@
     </el-form>
     <d2-table-header title="列表标题"><auth-button category="Button" :data="editFormReset"></auth-button></d2-table-header>
     <d2-table
+      ref="table"
       :searchForm="searchForm"
       :tableParams="tableParams"
       :getListApi="getListApi"
@@ -149,6 +150,8 @@ export default {
         removeApi({
           orderCode: row.orderCode
         }).then(() => {
+          // 删除操作后，删除表格。d2-admin设置一个ref
+          this.$refs.table.refreshTable()
           notice.okTips()
         }).catch(() => {
           notice.errorTips()

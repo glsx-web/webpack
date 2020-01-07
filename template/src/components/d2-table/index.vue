@@ -7,13 +7,14 @@
       border
       :highlight-current-row="true"
       :stripe="true"
+      @sort-change="sortChange"
     >
       <el-table-column
         align="center"
         width="60px"
         label="序号"
         type='index'
-        :index="index=>index+(page.pageSize - 1) * page.pageCount + 1"
+        :index="index=>index+(pagination.pageSize - 1) * pagination.pageCount + 1"
       ></el-table-column>
       <el-table-column
         v-for="(item, index) in tableParams.tableColumns"
@@ -23,9 +24,30 @@
         :width="item.width"
         :min-width="item.minWidth"
         :align="item.align||'center'"
+        :sortable="item.sortable"
       >
         <template slot-scope="scope">
-          <template v-if="item.tagLabel">
+          <slot
+            v-if="item.addHtml"
+            :name="item.addHtml"
+            :scope="scope.row"
+            :prop="item.prop"
+            :momFlag="item.momFlag"
+          ></slot>
+          <template v-else-if="item.momFlag">
+            <div>{{scope.row[item.prop]}}
+              <span
+                v-if="scope.row[item.momFlag] > 0"
+                class="el-icon-top"
+              ></span>
+              <span
+                v-else-if="scope.row[item.momFlag] < 0"
+                class="el-icon-bottom"
+              ></span>
+              <span v-else-if="scope.row[item.momFlag] == 0">--</span>
+            </div>
+          </template>
+          <template v-else-if="item.tagLabel">
             <el-tag
               v-if="!item.tagName"
               :type="tableParams.tag.type[scope.row[item.prop]]"
@@ -37,6 +59,9 @@
               :type="tableParams[item.tagName].type[scope.row[item.prop]]"
               v-text="tableParams[item.tagName].label[scope.row[item.prop]]"
             ></el-tag>
+          </template>
+          <template v-else-if="item.formatter">
+            {{item.formatter(scope.row)}}
           </template>
           <template v-else-if="getListApi">
             <p v-text="data[scope.$index][item.prop]"></p>
@@ -77,7 +102,6 @@
 </template>
 
 <script>
-import notice from '@/common/notice'
 export default {
   name: 'd2-table',
   data() {
@@ -90,7 +114,11 @@ export default {
         pageCount: 10,
         pageSize: 1
       },
-      total: 10
+      total: 10,
+      // 排序
+      sortColum: '',
+      sort: '',
+      pagination: {}
     }
   },
 
@@ -158,39 +186,55 @@ export default {
       handler(val) {
         const attr = Object.keys(val).find(item => val[item] !== this.oldValue[item])
         if (!val[attr] && this.oldValue[attr]) {
-          this.getListApi ? this.refreshTable() : this.$emit('refreshTable', this.page)
+          this.getListApi ? this.refreshEmit() : this.$emit('refreshTable', this.page)
         }
         this.oldValue = _.cloneDeep(val)
       },
       deep: true
-    },
-    // 调用其他接口，导致表格刷新-标识
-    '$store.state.d2admin.refreshtable.value'(val) {
-      this.refreshTable()
     }
+    // 调用其他接口，导致表格刷新-标识
+    // '$store.state.d2admin.refreshtable.value'(val) {
+    //   (val === 'fresh') && this.refreshEmit()
+    // }
   },
-
   mounted() {
     const btn = document.getElementById(this.tableParams.btnId)
-    btn && btn.addEventListener('click', this.refreshTable)
+    btn && btn.addEventListener('click', this.refreshEmit)
     this.getListApi && this.refreshTable()
   },
 
   methods: {
 
+    // 排序
+    sortChange({ column, prop, order }) {
+      this.sortColum = order ? prop : ''
+      this.sort = order
+      this.refreshTable()
+    },
+
+    // 发布事件，以期查询条件改变后，页面图表需要刷新
+    refreshEmit() {
+      this.$emit('searchChange')
+      this.refreshTable()
+    },
+
     refreshTable() {
       this.loading = true
-      const params = {
+      var params = {
         ...this.page,
         ...this.searchForm
       }
+      if (this.sort) {
+        params.sortColum = this.sortColum
+        params.sort = this.sort === 'descending' ? 1 : 0
+      }
       this.getListApi(params).then(res => {
+        this.pagination = res.pagination ? res.pagination : this.page
         this.data = res[this.tableParams.listName]
         res.pagination && (this.total = res.pagination.totalCount)
         this.loading = false
       }).catch(() => {
         this.loading = false
-        notice.errorTips()
       })
     },
 
@@ -209,4 +253,7 @@ export default {
 
 </script>
 <style>
+.a-click {
+  cursor: pointer;
+}
 </style>

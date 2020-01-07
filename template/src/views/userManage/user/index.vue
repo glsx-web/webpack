@@ -31,6 +31,7 @@
     </el-form>
     <d2-table-header title="用户列表"><auth-button category="action" label="创建用户"></auth-button></d2-table-header>
     <d2-table
+      ref="userTable"
       :searchForm="searchForm"
       :tableParams="tableParams"
       :getListApi="getListApi"
@@ -157,6 +158,7 @@ export default {
   mounted() {
     this.fetchData()
     this.$event.$on('e-reg-dialog-close', isReload => {
+      isReload && this.$refs.userTable.refreshTable()
       this.registerDialogVisible = false
     })
   },
@@ -216,6 +218,7 @@ export default {
       const { operateStatus } = res
       if (operateStatus) {
         notice.okTips(`${_actionText}成功!`)
+        this.$refs.userTable.refreshTable()
       } else {
         notice.errorTips(`${_actionText}失败！`)
       }

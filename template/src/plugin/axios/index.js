@@ -11,7 +11,7 @@ import {
 import Qs from 'qs'
 axios.defaults.withCredentials = true
 const expiresMinute = 60 // 过期时间(分钟)
-var refreshTable = false // 标记是否刷新表格
+// var refreshTable = false // 标记是否刷新表格
 // 创建一个错误
 export function errorCreate(msg) {
   const error = new Error(msg)
@@ -56,7 +56,7 @@ service.interceptors.request.use(
   config => {
     return new Promise(async resolve => {
       const { url, params } = config
-      params.refreshTable && (refreshTable = true)
+      // params.refreshTable && (refreshTable = true)
       await store.commit('d2admin/loading/set', true)
       const uuid = util.cookies.get('uuid')
       // 如果请求链接不在排除列表 (排除列表: 登录 基础数据) 并且cookie 过期(判断是否长时间未操作)
@@ -92,17 +92,17 @@ service.interceptors.response.use(
     switch (+code) {
       case 0:
         // [ 示例 ] code === 0 代表没有错误
-        if (refreshTable) {
-          store.commit('d2admin/refreshtable/set', !store.state.d2admin.refreshtable.value)
-          refreshTable = false
-        }
+        // if (refreshTable) {
+        //   store.commit('d2admin/refreshtable/set', !store.state.d2admin.refreshtable.value)
+        //   refreshTable = false
+        // }
         return data
       default:
         // 不是正确的 code
         errorCreate(`${dataAxios.message}`)
         break
     }
-    refreshTable = false
+    // refreshTable = false
   },
 
   error => {
