@@ -8,22 +8,35 @@
       slot="header"
     >
       <el-form-item label="名称">
-        <el-input v-model="searchForm.name" placeholder="请输入名称" clearable></el-input>
+        <el-input
+          v-model="searchForm.name"
+          placeholder="请输入名称"
+          clearable
+        ></el-input>
       </el-form-item>
-       <el-form-item label="创建时间">
-          <el-date-picker
-            v-model="createTime"
-            type="daterange"
-            value-format="yyyy-MM-dd"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          ></el-date-picker>
+      <el-form-item label="创建时间">
+        <el-date-picker
+          v-model="createTime"
+          type="daterange"
+          value-format="yyyy-MM-dd"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
-          <el-button type="primary" icon="el-icon-search" :id="tableParams.btnId">查询</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          :id="tableParams.btnId"
+        >查询</el-button>
       </el-form-item>
     </el-form>
-    <d2-table-header title="列表标题"><auth-button category="Button" :data="editFormReset"></auth-button></d2-table-header>
+    <d2-table-header title="列表标题">
+      <auth-button
+        category="Button"
+        :data="editFormReset"
+      ></auth-button>
+    </d2-table-header>
     <d2-table
       ref="table"
       :searchForm="searchForm"
@@ -47,7 +60,7 @@
 
 <script>
 import EditDialog from './editDialog'
-import { getListApi, removeApi } from '@api/table1'
+import { getListApi, editApi, removeApi } from '@api/table1'
 import notice from '@/common/notice'
 import util from '@/libs/util'
 export default {
@@ -88,9 +101,11 @@ export default {
           prop: 'orderCode',
           minWidth: '200'
         }, {
-          label: '创建时间',
-          prop: 'createTime',
-          minWidth: '180'
+          label: '销量',
+          prop: 'sales',
+          minWidth: '180',
+          sortable: 'custom',
+          momFlag: 'salesMom'
         }, {
           label: '类型',
           prop: 'orderType',
@@ -123,7 +138,7 @@ export default {
     }
   },
 
-  mounted() {},
+  mounted() { },
 
   methods: {
     handleEditClose() {
@@ -132,7 +147,12 @@ export default {
 
     handleEditConfirm() {
       var editParams = JSON.parse(JSON.stringify(this.editForm))
-      this.editSubSystem(editParams)
+      editApi(editParams).then(res => {
+        notice.okTips()
+        this.editVisible = false
+        // 删除操作后，删除表格。d2-admin设置一个ref
+        this.$refs.table.refreshTable()
+      }).catch(() => { })
     },
 
     // 表格-编辑
@@ -156,7 +176,7 @@ export default {
         }).catch(() => {
           notice.errorTips()
         })
-      }).catch(() => {})
+      }).catch(() => { })
     }
   }
 }

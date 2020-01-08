@@ -85,7 +85,7 @@
       </el-table-column>
     </el-table>
     <el-pagination
-      v-if="pagination"
+      v-if="hasPage"
       background
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -141,7 +141,7 @@ export default {
       default: null
     },
     // 分页，默认有
-    pagination: {
+    hasPage: {
       type: Boolean,
       default: true
     },

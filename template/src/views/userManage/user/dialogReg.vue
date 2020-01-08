@@ -196,7 +196,7 @@ export default {
       const { role, station, post } = await this.load()
       this.baseData.posts = post
       this.baseData.stations = station
-      this.baseData.roles = role
+      this.baseData.roles = role.roles
       Object.freeze(this.baseData)
     }
   },

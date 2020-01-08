@@ -86,7 +86,7 @@ export default {
         ...this.searchForm
       }
       getListApi(params).then(res => {
-        console.log(res)
+        // console.log(res)
         this.tableData = res.data
         this.tableTotal = res.pagination.totalCount
       }).catch(() => {

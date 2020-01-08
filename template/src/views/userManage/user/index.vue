@@ -8,9 +8,9 @@
       <el-form-item label="角色：">
         <el-select v-model="searchForm.roleId" clearable placeholder="请选择">
           <el-option
+            v-for="(role,index) in baseData.roles"
             :label="role.roleName"
             :value="role.roleId"
-            v-for="(role,index) in baseData.roles"
             :key="index"
           ></el-option>
         </el-select>
@@ -125,7 +125,7 @@ export default {
         }, {
           label: '状态',
           prop: 'status',
-          width: '100',
+          width: '120',
           tagLabel: true
         }, {
           label: '姓名',
@@ -174,7 +174,7 @@ export default {
       const { role, station, post } = await this.load()
       this.baseData.posts = post
       this.baseData.stations = station
-      this.baseData.roles = role
+      this.baseData.roles = role.roles
       Object.freeze(this.baseData)
     },
     /* 接口请求-start */

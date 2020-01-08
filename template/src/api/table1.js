@@ -7,30 +7,18 @@ function getListApi(data) {
   return request(data)
 }
 
-function detailApi(data) {
-  data.method = `${path}detail`
+function editApi(data) {
+  data.method = `${path}edit`
   return request(data)
 }
 
 function removeApi(data) {
-  // data.refreshTable = true
   data.method = `${path}delete`
   return request(data)
 }
 
-function exportApi(data) {
-  data.method = `${path}exportPdf`
-  return request(data)
-}
-
-// function downloadApi(data) {
-//   data.method = `${path}download`
-//   return request(data)
-// }
-
 export {
   getListApi,
-  detailApi,
-  removeApi,
-  exportApi
+  editApi,
+  removeApi
 }
