@@ -151,11 +151,11 @@ module.exports = {
         args[0].cdn = cdn
         return args
       })
-    if (process.env.NODE_ENV === 'development') {
-      config
-        .plugin('webpack-bundle-analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   config
+    //     .plugin('webpack-bundle-analyzer')
+    //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    // }
     // 判断环境加入模拟数据
     // const entry = config.entry('app')
     // if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
