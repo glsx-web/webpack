@@ -28,7 +28,7 @@ import router from './router'
 
 /* eslint-disable no-new */
 (async () => {
-  const URL = 'http://oss-config.test.glsx.com.cn/mock/5be17454f31545347559d499/config'
+  const URL = 'https://oss-config.test.glsx.com.cn/mock/5be17454f31545347559d499/config'
   const admin = await axios.get(URL + '/admin')
   const common = await axios.get(URL + '/admin_common')
   Vue.use(GlsxVueComponets)
