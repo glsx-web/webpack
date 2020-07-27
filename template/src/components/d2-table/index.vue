@@ -59,7 +59,7 @@
             </div>
           </template> -->
           <template v-else-if="item.addSymbol">
-            <div v-text="item.addSymbol ? ( typeof(scope.row[item.prop]) === 'number' ? scope.row[item.prop] + item.addSymbol : '') : scope.row[item.prop]"></div>
+            <span v-text="item.addSymbol ? ( typeof(scope.row[item.prop]) === 'number' ? scope.row[item.prop] + item.addSymbol : '') : scope.row[item.prop]"></span>
           </template>
           <template v-else-if="item.tagLabel">
             <el-tag
