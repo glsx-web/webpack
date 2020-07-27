@@ -45,22 +45,6 @@
             :prop="item.prop"
             :width="item.width"
           ></slot>
-          <!-- <template v-else-if="item.momFlag">
-            <div>{{item.addSymbol ? ( typeof(scope.row[item.prop]) === 'number' ? scope.row[item.prop] + item.addSymbol : '') : (scope.row[item.prop] ? scope.row[item.prop] : 0)}}
-              <span
-                v-if="scope.row[item.momFlag] > 0"
-                class="el-icon-top"
-              ></span>
-              <span
-                v-else-if="scope.row[item.momFlag] < 0"
-                class="el-icon-bottom"
-              ></span>
-              <span v-else-if="scope.row[item.momFlag] == 0">--</span>
-            </div>
-          </template> -->
-          <!-- <template v-else-if="item.addSymbol">
-            <div>{{item.addSymbol ? ( typeof(scope.row[item.prop]) === 'number' ? scope.row[item.prop] + item.addSymbol : '') : scope.row[item.prop]}}</div>
-          </template> -->
           <template v-else-if="item.tagLabel">
             <el-tag
               v-if="!item.tagName"
