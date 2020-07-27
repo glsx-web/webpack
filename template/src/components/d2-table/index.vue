@@ -1,15 +1,26 @@
 <!-- 表格+分页 -->
 <template>
-  <div>
+  <div class="d2-table">
     <el-table
+      :ref="tableParams.mutiSelectName + 'MutiTable' || 'mutiTable'"
       :data="getListApi ? data : tableData"
+      :row-key="tableParams.mutiSelectUniqueKey || ''"
       v-loading="loading"
       border
       :highlight-current-row="true"
       :stripe="true"
       @sort-change="sortChange"
+      @selection-change="handleSelect"
     >
       <el-table-column
+        v-if="tableParams.mutiSelectUniqueKey"
+        type="selection"
+        width="55"
+        :reserve-selection="true"
+      >
+      </el-table-column>
+      <el-table-column
+        v-if="hasNum"
         align="center"
         width="60px"
         label="序号"
@@ -32,11 +43,10 @@
             :name="item.addHtml"
             :scope="scope.row"
             :prop="item.prop"
-            :momFlag="item.momFlag"
+            :width="item.width"
           ></slot>
-          <template v-else-if="item.momFlag">
-            <div>
-              <span v-text="scope.row[item.prop]"></span>
+          <!-- <template v-else-if="item.momFlag">
+            <div>{{item.addSymbol ? ( typeof(scope.row[item.prop]) === 'number' ? scope.row[item.prop] + item.addSymbol : '') : (scope.row[item.prop] ? scope.row[item.prop] : 0)}}
               <span
                 v-if="scope.row[item.momFlag] > 0"
                 class="el-icon-top"
@@ -47,7 +57,10 @@
               ></span>
               <span v-else-if="scope.row[item.momFlag] == 0">--</span>
             </div>
-          </template>
+          </template> -->
+          <!-- <template v-else-if="item.addSymbol">
+            <div>{{item.addSymbol ? ( typeof(scope.row[item.prop]) === 'number' ? scope.row[item.prop] + item.addSymbol : '') : scope.row[item.prop]}}</div>
+          </template> -->
           <template v-else-if="item.tagLabel">
             <el-tag
               v-if="!item.tagName"
@@ -119,7 +132,9 @@ export default {
       // 排序
       sortColum: '',
       sort: '',
-      pagination: {}
+      pagination: {},
+      // 多选数组
+      mutiSelectArr: {}
     }
   },
 
@@ -148,10 +163,25 @@ export default {
       type: Boolean,
       default: true
     },
+    // 序号，默认有
+    hasNum: {
+      type: Boolean,
+      default: true
+    },
     tableParams: {
       type: Object,
       default: () => {
         return {
+          // 多选-判断来自哪个页面
+          // mutiSelectName: {
+          //   type: String,
+          //   default: ''
+          // },
+          // 多选-唯一标识
+          // mutiSelectUniqueKey: {
+          //     type: String,
+          //     default: ''
+          // },
           // 搜索按钮id；new Date().getTime() + parseInt(Math.random() * 1000)
           // btnId: {
           //   type: String,
@@ -183,16 +213,16 @@ export default {
   },
 
   watch: {
-    searchForm: {
-      handler(val) {
-        const attr = Object.keys(val).find(item => val[item] !== this.oldValue[item])
-        if (!val[attr] && this.oldValue[attr]) {
-          this.getListApi ? this.refreshEmit() : this.$emit('refreshTable', this.page)
-        }
-        this.oldValue = _.cloneDeep(val)
-      },
-      deep: true
-    }
+    // searchForm: {
+    //   handler(val) {
+    //     const attr = Object.keys(val).find(item => val[item] !== this.oldValue[item])
+    //     if (!val[attr] && this.oldValue[attr]) {
+    //       this.getListApi ? this.refreshEmit() : this.$emit('refreshTable', this.page)
+    //     }
+    //     this.oldValue = _.cloneDeep(val)
+    //   },
+    //   deep: true
+    // },
     // 调用其他接口，导致表格刷新-标识
     // '$store.state.d2admin.refreshtable.value'(val) {
     //   (val === 'fresh') && this.refreshEmit()
@@ -213,13 +243,26 @@ export default {
       this.refreshTable()
     },
 
+    // 多选
+    handleSelect(val) {
+      this.mutiSelectArr[this.tableParams.mutiSelectName] = val
+    },
+
+    // 清空多选
+    clearMutiSelect() {
+      this.mutiSelectArr[this.tableParams.mutiSelectName] = []
+      this.$refs[this.tableParams.mutiSelectName + 'MutiTable'].clearSelection()
+    },
+
     // 发布事件，以期查询条件改变后，页面图表需要刷新
     refreshEmit() {
       this.$emit('searchChange')
       this.refreshTable()
     },
 
-    refreshTable() {
+    refreshTable(clearMuti = true) {
+      // 清空多选
+      clearMuti && this.clearMutiSelect()
       this.loading = true
       var params = {
         ...this.page,
@@ -242,12 +285,12 @@ export default {
     // 页码
     handleSizeChange(value) {
       this.page.pageCount = value
-      this.getListApi ? this.refreshTable() : this.$emit('refreshTable', this.page)
+      this.getListApi ? this.refreshTable(false) : this.$emit('refreshTable', this.page)
     },
 
     handleCurrentChange(value) {
       this.page.pageSize = value
-      this.getListApi ? this.refreshTable() : this.$emit('refreshTable', this.page)
+      this.getListApi ? this.refreshTable(false) : this.$emit('refreshTable', this.page)
     }
   }
 }
@@ -256,5 +299,11 @@ export default {
 <style>
 .a-click {
   cursor: pointer;
+}
+.el-table .cell {
+  line-height: 14px;
+}
+.d2-table p {
+  margin: 10px 0;
 }
 </style>
