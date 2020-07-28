@@ -89,6 +89,8 @@ export default {
       },
       // 表格参数
       tableParams: {
+        mutiSelectName: 'table1',
+        mutiSelectUniqueKey: 'id',
         btnId: new Date().getTime() + parseInt(Math.random() * 1000),
         listName: 'orderList',
         tag: Object.freeze({
@@ -105,7 +107,8 @@ export default {
           prop: 'sales',
           minWidth: '180',
           sortable: 'custom',
-          momFlag: 'salesMom'
+          momFlag: 'salesMom',
+          addSymbol: '元'
         }, {
           label: '类型',
           prop: 'orderType',
@@ -159,6 +162,15 @@ export default {
     handleEdit(row) {
       this.editForm = JSON.parse(JSON.stringify(row))
       this.handleEditClose()
+    },
+
+    // 批量操作
+    handleOperate(row) {
+      this.$notify({
+        title: '表格中选中的数据如下：',
+        message: this.$refs.table.mutiSelectArr[this.tableParams.mutiSelectName],
+        duration: 0
+      })
     },
 
     handleDelete(row) {

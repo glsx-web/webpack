@@ -100,6 +100,13 @@ export const resources = {
       type: 'button',
       handle: 'handleEdit',
       icon: 'plus'
+    }, {
+      authId: '1020104',
+      parentId: '10201',
+      label: '批量操作',
+      category: 'Button',
+      type: 'button',
+      handle: 'handleOperate'
     }]
   },
   '10202': {

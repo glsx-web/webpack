@@ -45,20 +45,6 @@
             :prop="item.prop"
             :width="item.width"
           ></slot>
-          <template v-else-if="item.momFlag">
-            <div>
-              <span v-text="scope.row[item.prop]"></span>
-              <span
-                v-if="scope.row[item.momFlag] > 0"
-                class="el-icon-top"
-              ></span>
-              <span
-                v-else-if="scope.row[item.momFlag] < 0"
-                class="el-icon-bottom"
-              ></span>
-              <span v-else-if="scope.row[item.momFlag] == 0">--</span>
-            </div>
-          </template>
           <template v-else-if="item.tagLabel">
             <el-tag
               v-if="!item.tagName"
@@ -76,10 +62,13 @@
             <span v-text="item.formatter(scope.row)"></span>
           </template>
           <template v-else-if="getListApi">
-            <p v-text="data[scope.$index][item.prop]"></p>
+            <span v-text="data[scope.$index][item.prop]"></span>
           </template>
           <template v-else>
-            <p v-text="tableData[scope.$index][item.prop]"></p>
+            <span v-text="tableData[scope.$index][item.prop]"></span>
+          </template>
+          <template v-if="item.addSymbol">
+            <span v-text="item.addSymbol"></span>
           </template>
         </template>
       </el-table-column>
