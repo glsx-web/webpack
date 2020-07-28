@@ -96,7 +96,7 @@
       :page-sizes="[10,20,30,40]"
       :page-size="page.pageCount"
       :total="getListApi ? total : tableTotal"
-      layout="sizes,total,->,prev,pager,next,jumper"
+      :layout="layout"
     >
     </el-pagination>
   </div>
@@ -145,10 +145,24 @@ export default {
       type: Function,
       default: null
     },
+    // 搜索前操作
+    beforeSearchFn: {
+      type: Function,
+      default: () => {
+        return new Promise((resolve, reject) => {
+          resolve()
+        })
+      }
+    },
     // 分页，默认有
     hasPage: {
       type: Boolean,
       default: true
+    },
+    // 分页组件配置
+    layout: {
+      type: String,
+      default: 'sizes,total,->,prev,pager,next,jumper'
     },
     // 序号，默认有
     hasNum: {
@@ -248,24 +262,27 @@ export default {
     },
 
     refreshTable(clearMuti = true) {
-      // 清空多选
-      clearMuti && this.clearMutiSelect()
-      this.loading = true
-      var params = {
-        ...this.page,
-        ...this.searchForm
-      }
-      if (this.sort) {
-        params.sortColum = this.sortColum
-        params.sort = this.sort === 'descending' ? 1 : 0
-      }
-      this.getListApi(params).then(res => {
-        this.pagination = res.pagination ? res.pagination : this.page
-        this.data = res[this.tableParams.listName]
-        res.pagination && (this.total = res.pagination.totalCount)
-        this.loading = false
-      }).catch(() => {
-        this.loading = false
+      this.beforeSearchFn().then(res => {
+        console.log(res)
+        // 清空多选
+        clearMuti && this.clearMutiSelect()
+        this.loading = true
+        var params = {
+          ...this.page,
+          ...this.searchForm
+        }
+        if (this.sort) {
+          params.sortColum = this.sortColum
+          params.sort = this.sort === 'descending' ? 1 : 0
+        }
+        this.getListApi(params).then(res => {
+          this.pagination = res.pagination ? res.pagination : this.page
+          this.data = res[this.tableParams.listName]
+          res.pagination && (this.total = res.pagination.totalCount)
+          this.loading = false
+        }).catch(() => {
+          this.loading = false
+        })
       })
     },
 

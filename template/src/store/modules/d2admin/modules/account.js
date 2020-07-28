@@ -23,6 +23,7 @@ export default {
           // token 代表用户当前登录状态 建议在网络请求中携带 token
           // 如有必要 token 需要定时更新，默认保存一天
           util.cookies.set('uuid', data.loginName)
+          // data.roleType = SUPPER_ADMIN
           const authes = (+data.roleType === SUPPER_ADMIN)
             ? util.permision.flatten(Object.values(localRoutes))
               .map(obj => ({ authId: obj.authId, parentId: obj.parentId }))

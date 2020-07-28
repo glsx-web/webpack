@@ -41,8 +41,16 @@
       ref="table"
       :searchForm="searchForm"
       :tableParams="tableParams"
+      :layout="layout"
       :getListApi="getListApi"
+      :beforeSearchFn="beforeSearchFn"
     >
+      <el-button
+        type="text"
+        slot="userName"
+        slot-scope="scope"
+        @click="handleClick(scope.scope.userName)"
+      >{{scope.scope.userName}}</el-button>
       <auth-button
         slot="auth-button"
         slot-scope="scope"
@@ -97,6 +105,10 @@ export default {
           type: ['', '', 'info', 'danger', 'warning', 'success'],
           label: ['', '状态一', '状态二', '状态三', '状态四', '状态五']
         }),
+        otherTag: Object.freeze({
+          type: ['', '', 'info', 'danger', 'warning', 'success'],
+          label: ['', '一', '二', '三', '四', '五']
+        }),
         tableOption: true,
         tableColumns: [{
           label: '订单编号',
@@ -107,7 +119,7 @@ export default {
           prop: 'sales',
           minWidth: '180',
           sortable: 'custom',
-          momFlag: 'salesMom',
+          // momFlag: 'salesMom',
           addSymbol: '元'
         }, {
           label: '类型',
@@ -124,13 +136,20 @@ export default {
         }, {
           label: '申请人',
           prop: 'userName',
+          addHtml: 'userName',
           width: '140'
         }, {
           label: '状态',
           prop: 'status',
           tagLabel: true
+        }, {
+          label: '状态2',
+          prop: 'status2',
+          tagLabel: true,
+          tagName: 'otherTag'
         }]
       },
+      layout: 'sizes, prev, pager, next, jumper, ->, total',
       getListApi: getListApi
     }
   },
@@ -144,6 +163,13 @@ export default {
   mounted() { },
 
   methods: {
+    // 在搜索前，特殊操作函数
+    beforeSearchFn() {
+      return new Promise((resolve, reject) => {
+        this.searchForm.name = '改变值--'
+        resolve()
+      })
+    },
     handleEditClose() {
       this.editVisible = !this.editVisible
     },
@@ -169,6 +195,14 @@ export default {
       this.$notify({
         title: '表格中选中的数据如下：',
         message: this.$refs.table.mutiSelectArr[this.tableParams.mutiSelectName],
+        duration: 0
+      })
+    },
+
+    handleClick(item) {
+      this.$notify({
+        title: '申请人：',
+        message: item,
         duration: 0
       })
     },
