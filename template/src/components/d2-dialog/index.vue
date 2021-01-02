@@ -20,7 +20,7 @@
           type="primary"
           @click="handleConfirm"
           :loading="$store.state.d2admin.loading.value"
-        >{{btnOkLabel}}</el-button>
+        ></el-button>
         <slot name="btn-middle"></slot>
       </div>
     </el-dialog>
