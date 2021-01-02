@@ -1,17 +1,19 @@
 import store from '@/store'
-import axios from 'axios'
+// import axios from 'axios'
 import {
   Message
 } from 'element-ui'
 import util from '@/libs/util'
-import router from '@/router'
+// import router from '@/router'
+// import {
+//   LogExternals
+// } from '@/common/constants'
 import {
-  LogExternals
-} from '@/common/constants'
+  baseConfig
+} from '@/main'
 import Qs from 'qs'
 axios.defaults.withCredentials = true
-const expiresMinute = 60 // 过期时间(分钟)
-// var refreshTable = false // 标记是否刷新表格
+// const expiresMinute = 60 // 过期时间(分钟)
 // 创建一个错误
 export function errorCreate(msg) {
   const error = new Error(msg)
@@ -44,8 +46,8 @@ function errorLog(error) {
 //  VUE_APP_API=http://192.168.3.191:8944/router
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: process.env.VUE_APP_API,
-  timeout: 5000, // 请求超时时间
+  // baseURL: baseURL,
+  timeout: 100000, // 请求超时时间
   transformRequest: [function(data) {
     return Qs.stringify(data)
   }]
@@ -55,21 +57,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     return new Promise(async resolve => {
-      const { url, params } = config
-      // params.refreshTable && (refreshTable = true)
       await store.commit('d2admin/loading/set', true)
-      const uuid = util.cookies.get('uuid')
-      // 如果请求链接不在排除列表 (排除列表: 登录 基础数据) 并且cookie 过期(判断是否长时间未操作)
-      if (!LogExternals.some(u => u === url || (params && u === params.method)) && !uuid) {
-        await store.dispatch('d2admin/account/logout')
-        router.replace('/login')
-      }
-      if (uuid) { // 判断 cookie 是否存在 存在则更新时间 避免登出时 记录空值
-        const inExpiresMinutes = new Date(new Date().getTime() + expiresMinute * 60 * 1000)
-        util.cookies.set('uuid', uuid, {
-          expires: inExpiresMinutes
-        })
-      }
       resolve(config)
     })
   },
@@ -86,23 +74,18 @@ service.interceptors.response.use(
     store.commit('d2admin/loading/set', false)
     // dataAxios 是 axios 返回数据中的 data
     const dataAxios = response.data
+    const ruleResult = baseConfig.axios.result
     // 这个状态码是和后端约定的
-    const { code, data } = dataAxios
     // 有 code 代表这是一个后端接口 可以进行进一步的判断
-    switch (+code) {
-      case 0:
+    switch (+dataAxios[ruleResult.code_key]) {
+      case ruleResult.code_success_value:
         // [ 示例 ] code === 0 代表没有错误
-        // if (refreshTable) {
-        //   store.commit('d2admin/refreshtable/set', !store.state.d2admin.refreshtable.value)
-        //   refreshTable = false
-        // }
-        return data
+        return dataAxios[ruleResult.data_key]
       default:
         // 不是正确的 code
-        errorCreate(`${dataAxios.message}`)
+        errorCreate(`${dataAxios[ruleResult.message_key]}`)
         break
     }
-    // refreshTable = false
   },
 
   error => {

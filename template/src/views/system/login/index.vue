@@ -3,16 +3,28 @@
     <dialog-reg :isVisible="registerDialogVisible" />
     <div class="page-login--layer page-login--layer-area">
       <ul class="circles">
-        <li v-for="n in 10" :key="n"></li>
+        <li
+          v-for="n in 10"
+          :key="n"
+        ></li>
       </ul>
     </div>
-    <div class="page-login--layer page-login--layer-time" flex="main:center cross:center">{{time}}</div>
+    <div
+      class="page-login--layer page-login--layer-time"
+      flex="main:center cross:center"
+    >{{time}}</div>
     <div class="page-login--layer">
-      <div class="page-login--content" flex="dir:top main:justify cross:stretch box:justify">
+      <div
+        class="page-login--content"
+        flex="dir:top main:justify cross:stretch box:justify"
+      >
         <div class="page-login--content-header">
           <p class="page-login--content-header-motto"></p>
         </div>
-        <div class="page-login--content-main" flex="dir:top main:center cross:center">
+        <div
+          class="page-login--content-main"
+          flex="dir:top main:center cross:center"
+        >
           <!-- form -->
           <div class="page-login--form">
             <div class="form-left">
@@ -24,21 +36,26 @@
                 size="default"
               >
                 <div class="title-wrap">
-                  <span class="form-title">tFIMS管理系统</span>
-                  <span class="form-sub">让服务更智慧、更直接</span>
+                  <!-- <span class="form-title">{{systemName}}</span> -->
+                  <span class="form-title">
+                    <img src="./image/title.png" alt="D+智享车生活"/>
+                  </span>
+                  <span class="form-sub">{{systemSubName}}</span>
                 </div>
                 <div class="input-wrap">
-                  <el-form-item prop="loginName">
+                  <el-form-item prop="userName">
                     <el-input
                       type="text"
                       v-on:keyup.native.13="submit"
-                      v-model="formLogin.loginName"
-                      placeholder="请输入用户名"
+                      v-model="formLogin.userName"
+                      placeholder="用户名"
                       clearable
-                      maxlength="10"
                       v-focus
                     >
-                      <d2-el-icon slot="prepend" name="user"></d2-el-icon>
+                      <!-- <d2-el-icon
+                        slot="prepend"
+                        name="user"
+                      ></d2-el-icon> -->
                     </el-input>
                   </el-form-item>
                   <el-form-item prop="password">
@@ -47,15 +64,24 @@
                       v-model="formLogin.password"
                       v-on:keyup.native.13="submit"
                       clearable
-                       maxlength="12"
-                      placeholder="请输入密码"
+                      placeholder="密码"
                     >
-                      <d2-el-icon slot="prepend"  name="key"/>
+                      <!-- <d2-el-icon
+                        slot="prepend"
+                        name="key"
+                      /> -->
                     </el-input>
                   </el-form-item>
                   <el-form-item class="form-action">
-                    <el-button @click="submit" type="primary" :loading="$store.state.d2admin.loading.value" class="button-login">登录</el-button>
                     <el-button
+                      @click="submit"
+                      type="primary"
+                      :loading="$store.state.d2admin.loading.value"
+                      class="button-login"
+                      :style="{'width': hasReg ? '' : '100%' }"
+                    >登录</el-button>
+                    <el-button
+                      v-if="hasReg"
                       @click.prevent="registerDialogVisible = true"
                       plain
                       class="button-reg"
@@ -85,7 +111,6 @@
 <script>
 import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
-import { LOGIN_TYPE } from '@/common/constants'
 export default {
   components: {
     DialogReg: () => import('./dialogReg')
@@ -97,26 +122,31 @@ export default {
       time: dayjs().format('HH:mm:ss'),
       // 表单
       formLogin: {
-        loginName: '',
-        password: '',
-        loginType: LOGIN_TYPE
+        userName: 'dongdao',
+        // userName: 'houlai',
+        password: '123456'
+        // userName: '',
+        // password: ''
       },
       // 表单校验
       rules: Object.freeze({
-        loginName: [{
+        userName: [{
           required: true,
           message: '请输入用户名',
           trigger: 'submit'
-        }
-        ],
+        }],
         password: [{
           required: true,
           message: '请输入密码',
           trigger: 'submit'
-        }
-        ]
+        }]
       })
     }
+  },
+  created() {
+    this.systemName = this.baseConfig.sysName || '系统'
+    this.systemSubName = this.baseConfig.subName || '说明'
+    this.hasReg = this.baseConfig.hasReg || false
   },
   mounted() {
     this.timeInterval = setInterval(() => this.refreshTime(), 1000)
@@ -128,29 +158,26 @@ export default {
   methods: {
     ...mapActions({
       login: 'd2admin/account/login',
-      current: 'd2admin/page/currentGet'
+      current: 'd2admin/page/currentGet',
+      initBaseData: 'd2admin/base/init'
     }),
-    // ...mapActions('d2admin/account', ['login']),
     refreshTime() {
       this.time = dayjs().format('HH:mm:ss')
     },
     // 提交登录信息
     submit() {
-      // console.log(navigator.userAgent.toLocaleLowerCase())
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          const { browser, os } = this.$store.state.d2admin.ua.data
           const _p = {
-            ...this.formLogin,
-            deviceCode: `${os.name}${os.version}-${browser.name}${browser.version}`
+            ...this.formLogin
           }
           // 登录
           // 注意 这里的演示没有传验证码
           // 具体需要传递的数据请自行修改代码
           this.login(_p)
-            // .then(() => this.$store.dispatch('d2admin/auth/init'))
             .then(async _ => {
               const _current = await this.current()
+              await this.initBaseData()
               this.$router.replace(this.$route.query.redirect || _current)
             })
         }
@@ -256,19 +283,21 @@ export default {
     .form-left {
       width: 300px;
       .title-wrap {
-        width: 180px;
-        height: 45px;
-        margin-bottom: 62px;
+        text-align: right;
+        margin-bottom: 30px;
         .form-title {
-          font-size: 20px;
-          color: #333;
-          line-height: 28px;
+          width: 280px;
+          height: 52px;
+        }
+        .form-title img{
+          width: 100%;
+          height: 100%;
         }
         .form-sub {
           font-size: 12px;
           color: #999;
           line-height: 17px;
-          float: left;
+          letter-spacing: 18px;
         }
       }
       .input-warp {
@@ -299,8 +328,10 @@ export default {
         .button-login {
           // background-color: #3D6FE4 !important;
           // color: #FFF;
+          background-image: linear-gradient(148deg, #0BCDFE 0%, #36B2E6 28%, #0947C6 100%, #0947C6 100%);
           letter-spacing: 2px;
           float: left;
+          border: none;
         }
         .button-reg {
           border: 1px solid #ddd;
@@ -314,15 +345,17 @@ export default {
     .form-right {
       width: 354px;
       .img-top {
-        width: 364px;
+        width: 320px;
         height: 24px;
-        background: url("./image/bz.png");
+        background: url('./image/bz.png');
+        background-size: 320px auto;
         margin-bottom: 53px;
-        transform: translateX(-20px);
+        transform: translateY(20px);
       }
       .img-bg {
         // box-sizing: border-box;
-        background: url("./image/bg.png");
+        background: url('./image/bg.png') no-repeat;
+        background-size: 320px auto;
         width: 322px;
         height: 276px;
         // border:6px solid #F4F9FF;

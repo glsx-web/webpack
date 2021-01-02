@@ -11,22 +11,22 @@
             :src="'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
           ></el-avatar>
         </div>
-        <div class="name-role">
-          <span class="sender">{{ user.userName }} - {{ user.postName }}</span>
+        <!-- <div class="name-role">
+          <span class="sender"> - </span>
         </div>
         <div class="registe-info">
           <span class="registe-info">
             <d2-el-icon name="time" />
             有效期：<span v-text="user.validTime || '未知' "></span>
           </span>
-        </div>
+        </div> -->
       </div>
       <!-- <div class="personal-relation">
         <span class="relation-item">followers</span>
         <span class="relation-item">watches</span>
         <span class="relation-item">friends</span>
       </div>-->
-      <div class="main-operation">
+      <!-- <div class="main-operation">
         <span class="main-operation-item">
           <el-button
             size="small"
@@ -41,7 +41,7 @@
             @click="passwordVisible = true"
           > 修改密码</el-button>
         </span>
-      </div>
+      </div> -->
       <div
         class="other-operation"
         @click="clear"

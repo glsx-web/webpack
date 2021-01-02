@@ -11,7 +11,7 @@
     </el-dropdown-menu>
   </el-dropdown>-->
   <div v-popover:popover-personal class="d2-mr personal-wrap">
-    <span class="btn-text">{{info && info.userName ? `${info.userName}` : '未登录'}} <d2-el-icon name="caret-bottom"/></span>
+    <span v-if="show" class="btn-text">{{info && info.userName ? `${info.userName}` : '未登录'}} <d2-el-icon name="caret-bottom"/></span>
     <el-popover ref="popover-personal" placement="bottom-end" trigger="hover">
       <personal-panel :user="info"></personal-panel>
     </el-popover>
@@ -20,17 +20,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import PersonalPanel from '../personal-panel'
 export default {
+  data() {
+    return {
+      show: true
+    }
+  },
   components: {
     PersonalPanel
   },
   mounted() {
+    this.show = false
     this.$event.$on('e-password-dialog', res => (this.passVisible = res))
+    this.getInfo()
   },
-  computed: {
-    ...mapState('d2admin/user', ['info'])
+  methods: {
+    ...mapActions('d2admin/user', ['load']),
+    async getInfo() {
+      this.info = await this.load()
+      this.$nextTick(() => {
+        this.show = true
+      })
+    }
   }
 }
 </script>

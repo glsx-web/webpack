@@ -102,8 +102,8 @@ export default {
         btnId: new Date().getTime() + parseInt(Math.random() * 1000),
         listName: 'orderList',
         tag: Object.freeze({
-          type: ['', '', 'info', 'danger', 'warning', 'success'],
-          label: ['', '状态一', '状态二', '状态三', '状态四', '状态五']
+          type: ['', '', 'danger', 'success'],
+          label: ['', '待审核', '审核不通过', '审核通过']
         }),
         otherTag: Object.freeze({
           type: ['', '', 'info', 'danger', 'warning', 'success'],

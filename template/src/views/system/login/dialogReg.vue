@@ -15,8 +15,8 @@
       class="reg-dialog-form"
       :rules="rules"
     >
-      <el-form-item label="用户名：" prop="loginName">
-        <el-input v-model="regForm.loginName" requred maxlength="10" clearable placeholder="请输入用户名" :show-word-limit="true"></el-input>
+      <el-form-item label="用户名：" prop="userName">
+        <el-input v-model="regForm.userName" requred maxlength="10" clearable placeholder="请输入用户名" :show-word-limit="true"></el-input>
       </el-form-item>
       <el-form-item label="密码：" prop="password">
         <el-input type="password" v-model="regForm.password" placeholder="请输入密码" clearable maxlength="12" :show-word-limit="true" :show-password="true"></el-input>
@@ -24,51 +24,6 @@
       <el-form-item label="确认密码：" prop="confirm">
         <el-input type="password" v-model="regForm.confirm" placeholder="请再输入一次密码" clearable maxlength="12" :show-word-limit="true" :show-password="true"></el-input>
       </el-form-item>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="姓名：" prop="userName">
-            <el-input v-model="regForm.userName" placeholder="请输入姓名" clearable maxlength="8" :show-word-limit="true"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="联系方式：" prop="mobile">
-            <el-input v-model="regForm.mobile" placeholder="请输入联系方式" oninput ="value=value.replace(/[^\d]/g,'')" clearable maxlength="11" :show-word-limit="true"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-form-item label="所属公司：" prop="companyName">
-        <el-input v-model="regForm.companyName" placeholder="请输入公司名称" maxlength="32" :show-word-limit="true" clearable ></el-input>
-      </el-form-item>
-      <el-form-item label="部门：" prop="departName">
-        <el-input v-model="regForm.departName" placeholder="请输入部门名称" maxlength="32" :show-word-limit="true"  clearable></el-input>
-      </el-form-item>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="职务：" prop="postCode">
-            <el-select v-model="regForm.postCode" placeholder="请选择">
-              <el-option
-                :label="post.confValue"
-                :value="post.confCode"
-                v-for="(post,index) in baseData.posts"
-                :key="index"
-                :disabled="POST_DISABLED.includes(post.confCode)"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="所属站点：" prop="stationCode">
-            <el-select v-model="regForm.stationCode" placeholder="请选择" class="sigle-select">
-              <el-option
-                :label="station.confValue"
-                :value="station.confCode"
-                v-for="(station,index) in baseData.stations"
-                :key="index"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
       <el-form-item flex="main:left cross:center"></el-form-item>
     </el-form>
     <div slot="footer">
@@ -79,9 +34,7 @@
 </template>
 <script>
 import { Reg } from '@/api/sys.account'
-import { mapActions } from 'vuex'
 import notice from '@/common/notice'
-import { RegistType, POST_DISABLED } from '@/common/constants'
 export default {
   name: 'DialogReg',
   props: {
@@ -97,22 +50,14 @@ export default {
   },
   data() {
     return {
-      POST_DISABLED,
       company: [],
       regForm: {
-        createType: RegistType.BY_SELF, // 1 自注册 2 管理员创建
-        loginName: '',
-        password: '',
-        confirm: '',
         userName: '',
-        mobile: '',
-        companyName: '',
-        departName: '',
-        postCode: '',
-        stationCode: ''
+        password: '',
+        confirm: ''
       },
       rules: Object.freeze({
-        loginName: [
+        userName: [
           { required: true, message: '用户名不能为空', trigger: ['blur'] }
         ],
         password: [
@@ -144,9 +89,9 @@ export default {
             trigger: 'blur'
           }
         ],
-        userName: [
-          { required: true, message: '姓名不能为空', trigger: ['blur'] }
-        ],
+        // userName: [
+        //   { required: true, message: '姓名不能为空', trigger: ['blur'] }
+        // ],
         mobile: [
           { required: true,
             validator: (rule, value, callback) => {
@@ -174,19 +119,10 @@ export default {
         stationCode: [
           { required: true, message: '所属站点不能为空', trigger: ['blur'] }
         ]
-      }),
-
-      /* -----------------------基础数据---------------------- */
-      baseData: {
-        // 所属站点
-        stations: [],
-        // 职务
-        posts: []
-      }
+      })
     }
   },
   methods: {
-    ...mapActions('d2admin/base', ['init']),
     handleClose() {
       this.$refs.regForm.resetFields()
       this.$event.$emit('e-reg-dialog', false)
@@ -207,18 +143,9 @@ export default {
           })
         }
       })
-    },
-    // 加载业务所需所有数据
-    async fetchData() {
-      // // 强制初始化基础数据
-      const { station, post } = await this.init()
-      this.baseData.posts = post
-      this.baseData.stations = station
-      Object.freeze(this.baseData)
     }
   },
   mounted() {
-    this.fetchData()
   }
 }
 </script>

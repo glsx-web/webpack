@@ -1,8 +1,8 @@
 /*
  * @Author: limin
  * @Date: 2019-08-27 19:16:26
- * @Last Modified by: limin
- * @Last Modified time: 2019-09-17 17:20:53
+ * @Last Modified by: chenwq
+ * @Last Modified time: 2020-12-14 11:01:26
  */
 const permision = {}
 /**
@@ -107,13 +107,14 @@ const _loop = function(res, fnGetMenu) {
 permision.format2Menu = function(oMenu) {
   if (!oMenu) return null
   const { icon, path, meta } = oMenu
-  const { title, authId, parentId } = meta
+  const { title, authId, parentId, sideHidden } = meta
   return {
     title,
     icon,
     path,
     authId,
-    parentId }
+    parentId,
+    sideHidden }
 }
 
 /**

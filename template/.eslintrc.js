@@ -18,29 +18,63 @@ module.exports = {
   plugins: ['vue'],
   globals: {
     NODE_ENV: false,
-    _:false,
-    echarts:false
+    _: false,
+    echarts: false
   },
   rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    // 添加，分号必须
-    // semi: ['error', 'always'],
-    'semi': [2, 'never'],
-    'semi-spacing': [2, {
+    'arrow-spacing': [2, {
+      'before': true,
+      'after': true
+    }],
+    'block-spacing': [2, 'always'],
+    'brace-style': [2, '1tbs', {
+      'allowSingleLine': true
+    }],
+    'comma-dangle': [2, 'never'],
+    'comma-spacing': [2, {
       'before': false,
       'after': true
     }],
-    'no-unexpected-multiline': 'off',
-    'space-before-function-paren': ['error', 'never'],
-    quotes: [
-      'error',
-      'single',
-      {
-        avoidEscape: true
-      }
-    ]
+    'comma-style': [2, 'last'],
+    'curly': [2, 'multi-line'],
+    'dot-location': [2, 'property'],
+    'indent': [2, 2, {
+      'SwitchCase': 1
+    }],
+    'key-spacing': [2, {
+      'beforeColon': false,
+      'afterColon': true
+    }],
+    'keyword-spacing': [2, {
+      'before': true,
+      'after': true
+    }],
+    'new-cap': [2, {
+      'newIsCap': true,
+      'capIsNew': false
+    }],
+    'no-extra-parens': [2, 'functions'],
+    'no-floating-decimal': 2,
+    'no-multi-spaces': 2,
+    'no-multiple-empty-lines': [2, {
+      'max': 1
+    }],
+    'no-trailing-spaces': 2,
+    'quotes': [2, 'single', {
+      'avoidEscape': true,
+      'allowTemplateLiterals': true
+    }],
+    'semi': [2, 'never'],
+    'space-before-blocks': [2, 'always'],
+    'space-before-function-paren': [2, 'never'],
+    'space-in-parens': [2, 'never'],
+    'space-infix-ops': 2,
+    'space-unary-ops': [2, {
+      'words': true,
+      'nonwords': false
+    }],
+    'spaced-comment': [2, 'always'],
+    'prefer-const': 2
   }
+
 };

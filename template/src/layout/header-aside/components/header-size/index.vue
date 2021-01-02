@@ -5,7 +5,7 @@
     </el-button>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item v-for="item in options" :key="item.value" :command="item.value">
-        <d2-icon :name="iconName(item.value)" class="d2-mr-5"/>{{item.label}}
+        <d2-icon :name="iconName(item.value)" class="d2-mr-5"/>
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>

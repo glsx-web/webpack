@@ -63,7 +63,7 @@
         :loading="uploading"
         @click="handleUpload">
         <d2-icon name="cloud-upload"/>
-        Upload {{log.length}} log data
+        Upload  log data
       </el-button>
     </template>
   </d2-container>

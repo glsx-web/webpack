@@ -37,6 +37,10 @@ export default {
       type: Object,
       default: null
     },
+    showBtnName: {
+      type: Array,
+      default: []
+    },
     data: Object
   },
   functional: true, // 开启函数化组件
@@ -49,8 +53,17 @@ export default {
      * data  点击按钮时 需要得到的参数  比如 table 中的 当前行数据 row
      * mapping 非必填  但: 当列表中的操作选项 根据 某个字段 变化的话 必填 且 必须 注明 field: 字段名
      * label 当传入label 字段时 标识明确指定渲染该label 的按钮
+     * size 按钮样式，默认mini
+     * showBtnName 按需显示按钮
      */
-    const { category, data, mapping, label } = ctx.props
+    const {
+      category,
+      data,
+      mapping,
+      label,
+      size,
+      showBtnName
+    } = ctx.props
     let curBtns = []
     /**
      * 判断一个按钮(btn)是否存在与当前行(data) 的映射关系(mapping)中
@@ -81,11 +94,13 @@ export default {
      * 循环最终显示的按钮列表
      * 并渲染到页面
      */
-    curBtns.forEach(btn =>
+    curBtns = showBtnName.length ? curBtns.filter(item => showBtnName.includes(item.label)) : curBtns
+    curBtns.forEach(btn => {
       __aBtns.push(h('el-button', {
         props: {
-          type: btn.type || 'text',
-          icon: btn.icon ? `el-icon-${btn.icon}` : ''
+          type: btn.type || (btn.category === 'Button' ? '' : 'text'),
+          icon: btn.icon ? `el-icon-${btn.icon}` : '',
+          size: size
         },
         style: {
           color: btn.color
@@ -93,7 +108,8 @@ export default {
         on: {
           click: (e) => btn.handle && _this[btn.handle](data, e)
         }
-      }, [btn.label])))
-    return h('div', {}, [...__aBtns, ctx.children])
+      }, [btn.ruleObj ? btn.ruleObj.rule[data[btn.ruleObj.attr]] : btn.label]))
+    })
+    return h('span', {}, [...__aBtns, ctx.children])
   }
 }

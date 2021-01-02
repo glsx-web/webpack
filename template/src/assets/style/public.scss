@@ -42,3 +42,11 @@ $prefix: d2;
   font-size: 14px;
   position: relative;
 }
+
+// element
+.el-table--medium td {
+  padding: 4px 0 !important;
+}
+.el-table .cell {
+  padding: 5px 5px;
+}

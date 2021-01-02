@@ -1,5 +1,5 @@
 <template>
-  <div class="header-datetime">{{time}}</div>
+  <div class="header-datetime"></div>
 </template>
 
 <script>

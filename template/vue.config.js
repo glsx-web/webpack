@@ -10,7 +10,7 @@ process.env.VUE_APP_VERSION = require('./package.json').version
 process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-M-D HH:mm:ss')
 
 // 基础路径 注意发布之前要先修改这里
-let publicPath = '/'
+const publicPath = '/dj-carlife-web/'
 const CDN_DOMAIN = 'https://cdn.bootcss.com'
 const cdn = {
   css: [
@@ -30,8 +30,8 @@ const cdn = {
     `${CDN_DOMAIN}/qs/6.8.0/qs.min.js`,
     // `${CDN_DOMAIN}/core-js/2.6.9/core.min.js`,
     // `${CDN_DOMAIN}/vue-i18n/8.14.0/vue-i18n.esm.js`,
-    `${CDN_DOMAIN}/UAParser.js/0.7.20/ua-parser.min.js`,
-    'https://unpkg.com/better-scroll@1.15.2/dist/bscroll.min.js'
+    `${CDN_DOMAIN}/UAParser.js/0.7.20/ua-parser.min.js`
+    // 'https://unpkg.com/better-scroll@1.15.2/dist/bscroll.min.js'
   ]
 }
 module.exports = {
@@ -61,7 +61,7 @@ module.exports = {
       'lodash': '_',
       // 'vue-i18n':'vue-i18n',
       'ua-parser-js': 'UAParser',
-      'better-scroll': 'BScroll',
+      // 'better-scroll': 'BScroll',
       'qs': 'Qs'
       // 'core-js': 'core-js'
     }

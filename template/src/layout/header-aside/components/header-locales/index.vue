@@ -12,7 +12,7 @@
         :key="index"
         :command="language.value">
         <d2-icon :name="$i18n.locale === language.value ? 'dot-circle-o' : 'circle-o'" class="d2-mr-5"/>
-        {{ language.label }}
+        
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>

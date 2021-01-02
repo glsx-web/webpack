@@ -16,22 +16,23 @@
         flex-box="0"
         flex>
         <div class="logo-group d2-theme-header-logo" :class="asideCollapse ? 'logo-only' : 'logo-all'" flex-box="0">
-          <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/logo/icon-only.png`">
-          <img v-else :src="`${$baseUrl}image/theme/logo/all.png`">
+          <img v-if="asideCollapse" src="../../assets/icon-only.png">
+          <img v-else src="../../assets/all.png">
         </div>
         <hamburger :onClick="handleToggleAside" :isActive="asideCollapse" flex-box="0" class="toggle-aside-btn"></hamburger>
+        <span class="header-title">{{headerTitle}}</span>
         <d2-menu-header flex-box="1"/>
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
           <d2-header-datetime />
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
-          <d2-header-search @click="handleSearchClick"/>
+          <!-- <d2-header-search @click="handleSearchClick"/> -->
           <!-- <d2-header-log v-if="$env === 'development'"/> -->
           <!-- <d2-header-size/> -->
           <d2-header-fullscreen/>
           <!-- <d2-header-locales v-if="$env === 'development'"/> -->
-          <d2-header-theme/>
-          <d2-header-color/>
+          <!-- <d2-header-theme/> -->
+          <!-- <d2-header-color/> -->
           <d2-header-user/>
         </div>
       </div>
@@ -87,16 +88,17 @@ import d2MenuHeader from './components/menu-header'
 import d2Tabs from './components/tabs'
 import d2HeaderFullscreen from './components/header-fullscreen'
 // import d2HeaderLocales from './components/header-locales'
-import d2HeaderSearch from './components/header-search'
+// import d2HeaderSearch from './components/header-search'
 // import d2HeaderSize from './components/header-size'
-import d2HeaderTheme from './components/header-theme'
+// import d2HeaderTheme from './components/header-theme'
 import d2HeaderUser from './components/header-user'
 // import d2HeaderLog from './components/header-log'
-import d2HeaderColor from './components/header-color'
+// import d2HeaderColor from './components/header-color'
 import hamburger from './components/hamburger'
 import d2HeaderDatetime from './components/header-datetime'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
+import { localRoutes } from '@/router/routes'
 export default {
   name: 'd2-layout-header-aside',
   mixins: [
@@ -108,12 +110,12 @@ export default {
     d2Tabs,
     d2HeaderFullscreen,
     // d2HeaderLocales,
-    d2HeaderSearch,
+    // d2HeaderSearch,
     // d2HeaderSize,
-    d2HeaderTheme,
+    // d2HeaderTheme,
     d2HeaderUser,
     // d2HeaderLog,
-    d2HeaderColor,
+    // d2HeaderColor,
     hamburger,
     d2HeaderDatetime
   },
@@ -122,10 +124,24 @@ export default {
       // [侧边栏宽度] 正常状态
       asideWidth: '200px',
       // [侧边栏宽度] 折叠状态
-      asideWidthCollapse: '65px'
+      asideWidthCollapse: '65px',
+      headerTitle: ''
     }
   },
   mounted() {
+    this.routerPath = []
+    Object.values(localRoutes).forEach((item, index) => {
+      this.routerPath.push(item.meta)
+    })
+    var targetItem = this.$route.matched
+    this.findTitle(targetItem[targetItem.length - 1].meta)
+  },
+  watch: {
+    '$route.matched'(val) {
+      var targetItem = val[val.length - 1].meta
+      this.headerTitle = ''
+      this.findTitle(targetItem)
+    }
   },
   computed: {
     ...mapState('d2admin', {
@@ -157,6 +173,12 @@ export default {
      */
     handleToggleAside() {
       this.asideCollapseToggle()
+    },
+    findTitle(val) {
+      this.headerTitle = val.title + (this.headerTitle ? ' / ' : '') + this.headerTitle
+      if (+val.parentId !== 0) {
+        return this.findTitle(this.routerPath.find(item => item.authId === val.parentId))
+      }
     }
   }
 }
@@ -176,15 +198,24 @@ export default {
 .logo-all{
   width: 200px;
   img{
-    height: 75px !important;
-    transform: translate3d(-8px, -6px, 0) !important;
+    width: 188px;
+    height: 34px !important;
+    // height: 75px !important;
+    transform: translate3d(0, 20px, 0) !important;
   }
 }
 .logo-only{
   width:65px;
   img{
-    height: 35px !important;
-    transform: translate3d(0px,12px,0) !important;
+    width: 32px;
+    height: 34px !important;
+    // height: 35px !important;
+    transform: translate3d(0,16px,0) !important;
   }
+}
+.header-title {
+  line-height: 60px;
+  color: #606266;
+  margin-left: 20px;
 }
 </style>

@@ -15,7 +15,6 @@ import '@/filters'
 
 // 功能插件
 import pluginError from '@/plugin/error'
-import pluginLog from '@/plugin/log'
 import pluginOpen from '@/plugin/open'
 
 export default {
@@ -26,7 +25,7 @@ export default {
     // 当前环境
     Vue.prototype.$env = process.env.NODE_ENV
     // 当前的 baseUrl
-    Vue.prototype.$baseUrl = process.env.BASE_URL
+    // Vue.prototype.$baseUrl = process.env.BASE_URL
     // 当前版本
     Vue.prototype.$version = process.env.VUE_APP_VERSION
     // 构建时间
@@ -34,10 +33,9 @@ export default {
     // 事件传递
     Vue.prototype.$event = new Vue()
     // Element
-    Vue.use(ElementUI, { size: 'medium', zIndex: 3000 })
+    Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
     // 插件
     Vue.use(pluginError)
-    Vue.use(pluginLog)
     Vue.use(pluginOpen)
   }
 }

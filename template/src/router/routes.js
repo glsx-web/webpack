@@ -89,15 +89,19 @@ export const resources = {
     }, {
       authId: '1020102',
       parentId: '10201',
-      label: '删除',
+      label: '审核',
       color: '#FF0000',
-      handle: 'handleDelete'
+      handle: 'handleDelete',
+      ruleObj: {
+        attr: 'status',
+        rule: { 1: '待审核', 2: '退回', 3: '' }
+      }
     }, {
       authId: '1020103',
       parentId: '10201',
       label: '添加',
       category: 'Button',
-      type: 'button',
+      type: 'primary',
       handle: 'handleEdit',
       icon: 'plus'
     }, {
@@ -105,7 +109,6 @@ export const resources = {
       parentId: '10201',
       label: '批量操作',
       category: 'Button',
-      type: 'button',
       handle: 'handleOperate'
     }]
   },
@@ -120,106 +123,6 @@ export const resources = {
       cache: true
     },
     component: _import('table2')
-  },
-  '107': {
-    path: '/users',
-    icon: 'user',
-    name: '帐号管理',
-    meta: {
-      title: '用户管理',
-      authId: '107',
-      parentId: '0'
-    }
-  },
-  '10701': {
-    path: '/user',
-    name: 'FimsUsers',
-    icon: 'user-solid',
-    meta: {
-      title: '用户管理',
-      authId: '10701',
-      parentId: '107',
-      cache: true
-    },
-    auth: [{ // 列表操作
-      authId: '1070101',
-      parentId: '10701',
-      label: '审核',
-      handle: 'handleVerify'
-    }, { //
-      authId: '1070102',
-      parentId: '10701',
-      label: '重置密码',
-      handle: 'handleOperation'
-    }, { //
-      authId: '1070103',
-      parentId: '10701',
-      label: '编辑',
-      handle: 'handleEdit'
-    }, { //
-      authId: '1070104',
-      parentId: '10701',
-      label: '延期',
-      handle: 'handleOperation'
-    }, { //
-      authId: '1070105',
-      parentId: '10701',
-      label: '禁用',
-      color: '#FF0000',
-      handle: 'handleOperation'
-    }, { //
-      authId: '1070106',
-      parentId: '10701',
-      label: '激活',
-      handle: 'handleOperation'
-    }, { // 列表操作
-      authId: '1070107',
-      parentId: '10701',
-      label: '创建用户',
-      category: 'action',
-      type: 'button',
-      handle: 'handleRegister',
-      icon: 'plus'
-    }],
-    component: _import('userManage/user')
-  },
-  '10702': {
-    path: '/role',
-    name: 'FimsRoles',
-    icon: 'open',
-    meta: {
-      title: '权限管理',
-      authId: '10702',
-      parentId: '107'
-    },
-    auth: [{
-      authId: '1070201',
-      parentId: '10702',
-      label: '创建角色',
-      category: 'action',
-      handle: 'handleEdit',
-      type: 'button',
-      icon: 'plus'
-    }, {
-      authId: '1070202',
-      parentId: '10702',
-      label: '权限编辑',
-      handle: 'handleEdit',
-      type: 'text'
-    }],
-    component: _import('userManage/role')
-  },
-  '10703': {
-    path: '/loginLogs',
-    name: 'FimsLoginLogs',
-    icon: 'tickets',
-    meta: {
-      title: '登录日志',
-      authId: '10703',
-      parentId: '107',
-      cache: true
-    },
-    component: _import('userManage/loginLogs')
   }
 }
 

@@ -8,21 +8,29 @@
       slot="header"
     >
       <el-form-item label="名称">
-        <el-input v-model="searchForm.keyWord" placeholder="请输入名称" clearable></el-input>
+        <el-input
+          v-model="searchForm.keyWord"
+          placeholder="请输入名称"
+          clearable
+        ></el-input>
       </el-form-item>
       <el-form-item>
-          <el-button type="primary"  icon="el-icon-search" @click="getList">查询</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          @click="getList"
+        >查询</el-button>
       </el-form-item>
     </el-form>
-     <d2-table-header title="物料列表"></d2-table-header>
-     <d2-table
+    <d2-table-header title="物料列表"></d2-table-header>
+    <d2-table
       ref="table"
       :searchForm="searchForm"
       :tableData="tableData"
       :tableTotal="tableTotal"
       :tableParams="tableParams"
       @refreshTable="getList"
-     ></d2-table>
+    ></d2-table>
   </d2-container>
 </template>
 
@@ -77,6 +85,7 @@ export default {
 
   mounted() {
     this.getList()
+    console.log(this.$store.state.d2admin.size.value)
   },
 
   methods: {

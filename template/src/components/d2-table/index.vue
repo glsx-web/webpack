@@ -11,9 +11,10 @@
       :stripe="true"
       @sort-change="sortChange"
       @selection-change="handleSelect"
+      :tree-props="{children: 'upgradeGoodsList'}"
     >
       <el-table-column
-        v-if="tableParams.mutiSelectUniqueKey"
+        v-if="tableParams.mutiSelectUniqueKey && tableParams.mutiSelectName"
         type="selection"
         width="55"
         :reserve-selection="true"
@@ -25,7 +26,7 @@
         width="60px"
         label="序号"
         type='index'
-        :index="index=>index+(pagination.pageSize - 1) * pagination.pageCount + 1"
+        :index="index=>index+(page.currentPage - 1) * page.pageSize + 1"
       ></el-table-column>
       <el-table-column
         v-for="(item, index) in tableParams.tableColumns"
@@ -62,7 +63,8 @@
             <span v-text="item.formatter(scope.row)"></span>
           </template>
           <template v-else-if="getListApi">
-            <span v-text="data[scope.$index][item.prop]"></span>
+            <span v-if="item.parentProp">{{scope.row[item.parentProp][item.prop]}}</span>
+            <span v-else>{{scope.row[item.prop]}}</span>
           </template>
           <template v-else>
             <span v-text="tableData[scope.$index][item.prop]"></span>
@@ -92,9 +94,9 @@
       background
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="page.pageSize"
+      :current-page="page.currentPage"
       :page-sizes="[10,20,30,40]"
-      :page-size="page.pageCount"
+      :page-size="page.pageSize"
       :total="getListApi ? total : tableTotal"
       :layout="layout"
     >
@@ -108,18 +110,16 @@ export default {
   data() {
     return {
       loading: false,
-      oldValue: {},
       data: [],
       // 页码
       page: {
-        pageCount: 10,
-        pageSize: 1
+        pageSize: 10,
+        currentPage: 1
       },
       total: 10,
       // 排序
       sortColum: '',
       sort: '',
-      pagination: {},
       // 多选数组
       mutiSelectArr: {}
     }
@@ -138,7 +138,7 @@ export default {
     },
     tableTotal: {
       type: Number,
-      default: 10
+      default: 0
     },
     // 获取列表接口
     getListApi: {
@@ -213,22 +213,6 @@ export default {
     }
   },
 
-  watch: {
-    // searchForm: {
-    //   handler(val) {
-    //     const attr = Object.keys(val).find(item => val[item] !== this.oldValue[item])
-    //     if (!val[attr] && this.oldValue[attr]) {
-    //       this.getListApi ? this.refreshEmit() : this.$emit('refreshTable', this.page)
-    //     }
-    //     this.oldValue = _.cloneDeep(val)
-    //   },
-    //   deep: true
-    // },
-    // 调用其他接口，导致表格刷新-标识
-    // '$store.state.d2admin.refreshtable.value'(val) {
-    //   (val === 'fresh') && this.refreshEmit()
-    // }
-  },
   mounted() {
     const btn = document.getElementById(this.tableParams.btnId)
     btn && btn.addEventListener('click', this.refreshEmit)
@@ -258,15 +242,16 @@ export default {
     // 发布事件，以期查询条件改变后，页面图表需要刷新
     refreshEmit() {
       this.$emit('searchChange')
-      this.refreshTable()
+      this.refreshTable(true, true)
     },
 
-    refreshTable(clearMuti = true) {
+    refreshTable(clearMuti = true, resetCurrentPage = false) {
       this.beforeSearchFn().then(res => {
-        console.log(res)
+        // console.log(res)
         // 清空多选
         clearMuti && this.clearMutiSelect()
         this.loading = true
+        resetCurrentPage && (this.page.currentPage = 1)
         var params = {
           ...this.page,
           ...this.searchForm
@@ -276,9 +261,11 @@ export default {
           params.sort = this.sort === 'descending' ? 1 : 0
         }
         this.getListApi(params).then(res => {
-          this.pagination = res.pagination ? res.pagination : this.page
+          // this.tableParams.needUnique && (res[this.tableParams.listName].forEach((item) => {
+          //   item[this.tableParams.mutiSelectUniqueKey]
+          // }))
           this.data = res[this.tableParams.listName]
-          res.pagination && (this.total = res.pagination.totalCount)
+          this.total = res.pagination.totalCount
           this.loading = false
         }).catch(() => {
           this.loading = false
@@ -286,14 +273,15 @@ export default {
       })
     },
 
-    // 页码
+    // 每页条数
     handleSizeChange(value) {
-      this.page.pageCount = value
+      this.page.pageSize = value
       this.getListApi ? this.refreshTable(false) : this.$emit('refreshTable', this.page)
     },
 
+    // 页码
     handleCurrentChange(value) {
-      this.page.pageSize = value
+      this.page.currentPage = value
       this.getListApi ? this.refreshTable(false) : this.$emit('refreshTable', this.page)
     }
   }

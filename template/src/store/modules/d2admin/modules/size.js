@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import router from '@/router'
-const size = 'medium' // medium small mini
+const size = 'small' // medium small mini
 export default {
   namespaced: true,
   state: {
