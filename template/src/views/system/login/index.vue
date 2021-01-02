@@ -122,11 +122,8 @@ export default {
       time: dayjs().format('HH:mm:ss'),
       // 表单
       formLogin: {
-        userName: 'dongdao',
-        // userName: 'houlai',
-        password: '123456'
-        // userName: '',
-        // password: ''
+        userName: '',
+        password: ''
       },
       // 表单校验
       rules: Object.freeze({
