@@ -62,6 +62,12 @@ module.exports = {
       type: 'confirm',
       message: 'Use ESLint to lint your code?',
     },
+    config: {
+      type: 'string',
+      require: true,
+      message: '输入配置config的路径（在mock中进行配置，可以先用默认，但是请勿改mock中的默认配置）',
+      default: 'temp-admin-config'
+    },
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
