@@ -10,7 +10,7 @@ process.env.VUE_APP_VERSION = require('./package.json').version
 process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-M-D HH:mm:ss')
 
 // 基础路径 注意发布之前要先修改这里
-const publicPath = '/dj-carlife-web/'
+const publicPath = '/{{ config }}/'
 const CDN_DOMAIN = 'https://cdn.bootcss.com'
 const cdn = {
   css: [
