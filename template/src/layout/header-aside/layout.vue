@@ -20,7 +20,7 @@
           <img v-else src="../../assets/all.png">
         </div>
         <hamburger :onClick="handleToggleAside" :isActive="asideCollapse" flex-box="0" class="toggle-aside-btn"></hamburger>
-        <span class="header-title">{{headerTitle}}</span>
+        <span class="header-title" v-text="headerTitle"></span>
         <d2-menu-header flex-box="1"/>
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
