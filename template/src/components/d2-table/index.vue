@@ -63,8 +63,7 @@
             <span v-text="item.formatter(scope.row)"></span>
           </template>
           <template v-else-if="getListApi">
-            <span v-if="item.parentProp">{{scope.row[item.parentProp][item.prop]}}</span>
-            <span v-else>{{scope.row[item.prop]}}</span>
+            <span v-text="scope.row[item.prop]"></span>
           </template>
           <template v-else>
             <span v-text="tableData[scope.$index][item.prop]"></span>
