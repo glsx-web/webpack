@@ -49,8 +49,9 @@
         type="text"
         slot="userName"
         slot-scope="scope"
+        v-text="scope.scope.userName"
         @click="handleClick(scope.scope.userName)"
-      >{{scope.scope.userName}}</el-button>
+      ></el-button>
       <auth-button
         slot="auth-button"
         slot-scope="scope"
@@ -208,7 +209,7 @@ export default {
     },
 
     handleDelete(row) {
-      this.$confirm('确认删除?', '删除', {
+      this.$confirm('确认' + (row.status === 1 ? '审核' : '退回') + '?', '删除', {
         comfirmButtonText: '确认',
         cancelButtonText: '取消',
         type: 'warning'
