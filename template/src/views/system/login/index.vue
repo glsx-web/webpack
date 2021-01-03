@@ -12,7 +12,8 @@
     <div
       class="page-login--layer page-login--layer-time"
       flex="main:center cross:center"
-    >{{time}}</div>
+      v-text="time"
+    ></div>
     <div class="page-login--layer">
       <div
         class="page-login--content"
