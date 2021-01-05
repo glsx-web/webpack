@@ -142,8 +142,8 @@ export default {
     }
   },
   created() {
-    this.systemName = this.baseConfig.sysName || '系统'
-    this.systemSubName = this.baseConfig.subName || '说明'
+    this.systemName = this.baseConfig.sysName
+    this.systemSubName = this.baseConfig.subName
     this.hasReg = !!this.baseConfig.hasReg
   },
   mounted() {
