@@ -11,37 +11,7 @@
             :src="'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
           ></el-avatar>
         </div>
-        <!-- <div class="name-role">
-          <span class="sender"> - </span>
-        </div>
-        <div class="registe-info">
-          <span class="registe-info">
-            <d2-el-icon name="time" />
-            有效期：<span v-text="user.validTime || '未知' "></span>
-          </span>
-        </div> -->
       </div>
-      <!-- <div class="personal-relation">
-        <span class="relation-item">followers</span>
-        <span class="relation-item">watches</span>
-        <span class="relation-item">friends</span>
-      </div>-->
-      <!-- <div class="main-operation">
-        <span class="main-operation-item">
-          <el-button
-            size="small"
-            icon="el-icon-user"
-            @click="personalVisible = true"
-          > 个人信息</el-button>
-        </span>
-        <span class="main-operation-item">
-          <el-button
-            size="small"
-            icon="el-icon-key"
-            @click="passwordVisible = true"
-          > 修改密码</el-button>
-        </span>
-      </div> -->
       <div
         class="other-operation"
         @click="clear"
@@ -189,8 +159,6 @@ export default {
   margin: -14px;
 }
 .personal-desc {
-  /* padding: 15px;
-  color: #fff; */
   padding: 24px 0;
 }
 .avatar {
@@ -202,35 +170,10 @@ export default {
   display: inline-block;
   text-align: center;
 }
-.name-role {
-  font-size: 12px;
-  padding: 5px;
-}
-.personal-relation {
-  font-size: 16px;
-  padding: 12px;
-  margin-right: 1px;
-  background: rgba(200, 209, 204, 0.3);
-}
-.relation-item {
-  padding: 12px;
-}
-.relation-item:hover {
-  cursor: pointer;
-  color: rgb(19, 138, 156);
-}
-.main-operation {
-  padding: 2px 0;
-  /* background: rgba(175, 182, 179, 0.3); */
-  border-color: rgba(201, 206, 206, 0.2);
-  border-top-width: 1px;
-  border-top-style: solid;
-  display: flex;
-  justify-content: space-between;
-}
-.main-operation-item {
-  margin: 4px;
-}
+
+
+
+
 .other-operation {
   padding: 0;
   margin-right: 1px;
