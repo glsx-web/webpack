@@ -144,7 +144,7 @@ export default {
   created() {
     this.systemName = this.baseConfig.sysName || '系统'
     this.systemSubName = this.baseConfig.subName || '说明'
-    this.hasReg = this.baseConfig.hasReg || false
+    this.hasReg = !!this.baseConfig.hasReg
   },
   mounted() {
     this.timeInterval = setInterval(() => this.refreshTime(), 1000)
