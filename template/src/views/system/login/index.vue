@@ -38,9 +38,6 @@
               >
                 <div class="title-wrap">
                   <span class="form-title" v-text="systemName"></span>
-                  <!-- <span class="form-title">
-                    <img src="./image/title.png" alt="D+智享车生活"/>
-                  </span> -->
                   <span class="form-sub" v-text="systemSubName"></span>
                 </div>
                 <div class="input-wrap">
@@ -53,10 +50,6 @@
                       clearable
                       v-focus
                     >
-                      <!-- <d2-el-icon
-                        slot="prepend"
-                        name="user"
-                      ></d2-el-icon> -->
                     </el-input>
                   </el-form-item>
                   <el-form-item prop="password">
@@ -67,10 +60,6 @@
                       clearable
                       placeholder="密码"
                     >
-                      <!-- <d2-el-icon
-                        slot="prepend"
-                        name="key"
-                      /> -->
                     </el-input>
                   </el-form-item>
                   <el-form-item class="form-action">
