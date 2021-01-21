@@ -37,11 +37,11 @@
                 size="default"
               >
                 <div class="title-wrap">
-                  <!-- <span class="form-title">{{systemName}}</span> -->
-                  <span class="form-title">
+                  <span class="form-title" v-text="systemName"></span>
+                  <!-- <span class="form-title">
                     <img src="./image/title.png" alt="D+智享车生活"/>
-                  </span>
-                  <span class="form-sub">{{systemSubName}}</span>
+                  </span> -->
+                  <span class="form-sub" v-text="systemSubName"></span>
                 </div>
                 <div class="input-wrap">
                   <el-form-item prop="userName">
