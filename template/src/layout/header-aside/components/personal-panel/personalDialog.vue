@@ -16,21 +16,8 @@
         <el-form-item label="姓名：" prop="userName">
           <el-input disabled v-model="user.userName"></el-input>
         </el-form-item>
-        <el-form-item label="联系方式：" prop="mobile">
-          <el-input disabled v-model="user.mobile"></el-input>
-        </el-form-item>
-        <el-form-item label="所属公司：" prop="companyName">
-          <el-input disabled v-model="user.companyName"></el-input>
-        </el-form-item>
-        <el-form-item label="部门：" prop="departName">
-          <el-input disabled v-model="user.departName"></el-input>
-        </el-form-item>
-        <el-form-item label="职务：" prop="postName">
-          <el-input disabled v-model="user.postName"></el-input>
-        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <!-- <el-button type="primary" @click="personDialogVisible = false">确 定</el-button> -->
         <el-button @click="handleClose">确 定</el-button>
       </div>
     </el-dialog>
