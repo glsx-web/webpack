@@ -1,6 +1,6 @@
 // 创建 el-menu-item
 export function elMenuItem(createElement, menu) {
-  return createElement('el-menu-item', { props: { index: menu.path } }, [
+  return menu.sideHidden ? '' : createElement('el-menu-item', { props: { index: menu.path } }, [
     ...menu.icon ? [
       createElement('i', { attrs: { class: `el-icon-${menu.icon}` } })
     ] : [],

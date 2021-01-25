@@ -37,7 +37,7 @@ export default {
           // token 代表用户当前登录状态 建议在网络请求中携带 token
           // 如有必要 token 需要定时更新，默认保存一天
           util.cookies.set('uuid', data.loginName)
-          const authes = _getAuthes(data)
+          let authes = _getAuthes(data)
           await dispatch('d2admin/auth/set', authes, { root: true })
           // // 设置 vuex 用户信息
           delete data.authes
@@ -112,7 +112,7 @@ export default {
           root: true
         })
         // DB -> store 持久化数据加载全局尺寸
-        await dispatch('d2admin/size/load', 'small', {
+        await dispatch('d2admin/size/load', 'mini', {
           root: true
         })
         // DB - > 初始化 基础数据
@@ -135,9 +135,8 @@ function _getAuthes(data) {
   }
   const { routes } = baseConfig
   if (routes) {
-    const configIds = util.permision.flatten(Object.values(routes)).map(obj => ({ authId: obj.authId, parentId: obj.parentId }))
+    let configIds = util.permision.flatten(Object.values(routes)).map(obj => ({ authId: obj.authId, parentId: obj.parentId }))
     authes.push(...configIds)
   }
   return authes
 }
-

@@ -37,8 +37,8 @@
                 size="default"
               >
                 <div class="title-wrap">
-                  <span class="form-title" v-text="systemName"></span>
-                  <span class="form-sub" v-text="systemSubName"></span>
+                  <p class="form-title" v-text="systemName"></p>
+                  <p class="form-sub" v-text="systemSubName"></p>
                 </div>
                 <div class="input-wrap">
                   <el-form-item prop="userName">
@@ -270,21 +270,18 @@ export default {
     .form-left {
       width: 300px;
       .title-wrap {
-        text-align: right;
+        height: 45px;
+        letter-spacing: 18px;
         margin-bottom: 30px;
         .form-title {
-          width: 280px;
-          height: 52px;
-        }
-        .form-title img{
-          width: 100%;
-          height: 100%;
+          font-size: 20px;
+          color: #333;
+          line-height: 10px;
         }
         .form-sub {
           font-size: 12px;
           color: #999;
-          line-height: 17px;
-          letter-spacing: 18px;
+          line-height: 10px;
         }
       }
       .input-warp {

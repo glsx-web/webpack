@@ -13,28 +13,19 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "better-scroll": "^1.15.2",
     "dayjs": "^1.8.12",
     "default-passive-events": "^2.0.0",
-    "element-ui": "^2.11.1",
     "file-saver": "^2.0.2",
     "flex.css": "^1.1.7",
     "fuse.js": "^3.4.4",
     "hotkeys-js": "^3.6.2",
-    "js-cookie": "^2.2.0",
     "js-md5": "^0.7.3",
-    "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
     "moment": "^2.29.1",
-    "nprogress": "^0.2.0",
-    "qs": "^6.8.0",
     "screenfull": "^4.2.0",
-    "ua-parser-js": "^0.7.19",
-    "vue": "^2.6.10",
-    "vue-i18n": "^8.14.0",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "sha1": "^1.1.1",
+    "vue-i18n": "^8.14.0"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.4.1",

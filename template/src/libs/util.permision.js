@@ -2,15 +2,28 @@
  * @Author: limin
  * @Date: 2019-08-27 19:16:26
  * @Last Modified by: chenwq
- * @Last Modified time: 2020-12-14 11:01:26
+ * @Last Modified time: 2021-01-25 10:44:57
  */
+import {  baseConfig } from '@/main'
 const permision = {}
+/**
+ * 追加config配置的路由信息
+ * @param {*} res
+ */
+permision.addRoutesInConfig= function(res){
+  const { routes } = baseConfig
+  if(routes){
+    return {...res,...routes}
+  }
+  return res
+}
 /**
  * 打包如有与按钮
  * resources 所有资源集合
  * idsInPermision 返回的权限id集合
  */
 permision.packRoutesBtns = function(resources, idsInPermision) {
+  resources = permision.addRoutesInConfig(resources)
   if (!resources || !idsInPermision || !idsInPermision.length) {
     throw new Error('参数错误')
   }
@@ -31,8 +44,6 @@ permision.packRoutesBtns = function(resources, idsInPermision) {
         } else {
           __oBtnInPermision[obj.parentId] = [__obj]
         }
-      // __oBtnInPermision[obj.parentId] = __objResource.auth
-      // __aBtnIdAll = __aBtnIdAll.concat([...__objResource.auth.action.map(o=>o.authId),...__objResource.auth.operation.map(o=>o.authId)])
       }
     }
   })
@@ -41,32 +52,31 @@ permision.packRoutesBtns = function(resources, idsInPermision) {
     'btn': __oBtnInPermision
   }
 }
-
 /**
  * 打包菜单
  * resources 所有资源集合
  * idsInPermision 返回的权限id集合
  */
 permision.packAsideMenus = function(resources, idsInPermision) {
+  resources =  permision.addRoutesInConfig(resources)
   if (!resources || !idsInPermision || !idsInPermision.length) {
     throw new Error('参数错误')
   }
   return _loop(idsInPermision, obj => permision.format2Menu(resources[obj.authId]))
 }
-
 /**
  * 打包菜单
  * resources 所有资源集合
  * idsInPermision 返回的权限id集合
  */
 permision.packMenusBtns = function(resources) {
+  resources =  permision.addRoutesInConfig(resources)
   if (!resources) {
     throw new Error('参数错误')
   }
   const menus = _loop(resources, obj => permision.format2ResourceMenu(obj))
   return { menus, all: [] }
 }
-
 const _loop = function(res, fnGetMenu) {
   const __aParent = []
   const __aSub = []
@@ -85,8 +95,8 @@ const _loop = function(res, fnGetMenu) {
     }
   })
   /**
-     * 第二次循环所有子菜单 ,然后挂载到对应的一级菜单
-     */
+   * 第二次循环所有子菜单 ,然后挂载到对应的一级菜单
+   */
   let __parent = null
   __aSub.forEach(obj => {
     __parent = __aParent.find(menu => +(menu.authId) === +(obj.parentId))
@@ -100,7 +110,6 @@ const _loop = function(res, fnGetMenu) {
   })
   return __aParent
 }
-
 /**
  * 格式化菜单 封装成系统所需格式
  */
@@ -116,7 +125,6 @@ permision.format2Menu = function(oMenu) {
     parentId,
     sideHidden }
 }
-
 /**
  * 格式化菜单 封装成系统所需格式
  */
@@ -131,7 +139,6 @@ permision.format2ResourceMenu = function(oMenu) {
     parentId,
     auth }
 }
-
 /**
  * 扁平化 routes (@/router/routes)
  */

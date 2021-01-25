@@ -23,15 +23,15 @@ axios({
   baseURL: process.env.VUE_APP_REPO + '/{{ config }}',
   method: 'get'
 }).then(({
-  data
+  data: config
 }) => {
-  baseConfig = data
+  baseConfig = config
   new Vue({
     router,
     store,
     // i18n,
     render: h => {
-      Vue.prototype.baseConfig = data
+      Vue.prototype.baseConfig = config
       return h(App)
     },
     created() {
@@ -42,7 +42,7 @@ axios({
       // 用户登录后从数据库加载一系列的设置
       this.$store.dispatch('d2admin/account/load')
       // 获取并记录用户 UA
-      this.$store.commit('d2admin/ua/get')
+      // this.$store.commit('d2admin/ua/get')
       // 初始化全屏监听
       this.$store.dispatch('d2admin/fullscreen/listen')
     },
