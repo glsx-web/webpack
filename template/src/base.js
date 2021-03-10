@@ -1,18 +1,23 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import GlsxVueComponents from 'glsx-vue-components'
-import 'glsx-vue-components/dist/glsx-vue-components.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+// import GlsxVueComponents from 'glsx-vue-components'
+// import 'glsx-vue-components/dist/glsx-vue-components.css'
 import { Request as request } from 'glsx-vue-common'
+import '@/styles/index.scss'
+// 组件
+import '@/components'
 
 {{#lodash}}
-// import _ from 'lodash'
+import _ from 'lodash'
 {{/lodash}}
 {{#axios}}
 // import axios from 'axios'
 {{/axios}}
 
-Vue.use(GlsxVueComponents)
+Vue.use(ElementUI)
 
 var mixin = {
   mounted() {
